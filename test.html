@@ -1,52 +1,30 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="ja">
 <head>
-<style type="text/css">
-  div {
-    width: 50px; 
-    height: 50px; 
-    position: absolute; 
-  }
-  div.a {
-    background-color: blue;
-    top: 0px; 
-    left: 0px; 
-  }
-  div.b {
-    background-color: red;
-    top: 50px; 
-    left: 0px; 
-  }
-  div.c {
-    background-color: green;
-    top: 100px; 
-    left: 0px; 
-  }
-</style>
-<script type="text/javascript">
-  function draggable(target) {
-    target.onmousedown = function() {
-      document.onmousemove = mouseMove;
-    };
-    document.onmouseup = function() {
-      document.onmousemove = null;
-    };
-    function mouseMove(e) {
-      var event = e ? e : window.event;
-      target.style.top = event.clientY + 'px';
-      target.style.left = event.clientX + 'px';
-    }
-  }
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<title>タイトル</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="a" id="a1"></div>
-<div class="b" id="b1"></div>
-<div class="c" id="c1"></div>
-<script type="text/javascript">
-  draggable(document.getElementById('a1'));
-  draggable(document.getElementById('b1'));
-  draggable(document.getElementById('c1'));
-</script>
-<hr size="10" width="50%" color="green">
+<header>
+  <h1></h1>
+</header>
+<article>
+  <section>
+    <h2></h2>
+    <p>スマホ対応</p>
+  </section>
+</article>
+<nav>
+  <ul>
+    <li><a href="#"></a></li>
+    <li><a href="#"></a></li>
+    <li><a href="#"></a></li>
+  </ul>
+</nav>
+<footer>
+  <p></p>
+</footer>
 </body>
 </html>
