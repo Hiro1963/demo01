@@ -35,6 +35,7 @@
         }
       }
       function onMove(e) {
+        e.preventDefault();
         var offsetX = canvas.getBoundingClientRect().left;
         var offsetY = canvas.getBoundingClientRect().top;
         x = e.clientX - offsetX;
@@ -44,7 +45,6 @@
           objY = y + relY;
           drawRect();
         }
-        e.preventDefault();
       }
       function onUp(e) {
         dragging = false;
