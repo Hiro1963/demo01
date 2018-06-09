@@ -33,6 +33,8 @@
           relX = objX - x;
           relY = objY - y;
         }
+//ブラウザスクロールを止める
+e.preventDefault();
       }
       function onMove(e) {
         var offsetX = canvas.getBoundingClientRect().left;
