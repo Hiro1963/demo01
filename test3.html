@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Tracker Marker Ver.0001</title>
+    <title>Touch Tracker Marker Ver.0012</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
 <style type="text/css">
 body { margin: 0px; overflow: hidden; }
@@ -49,10 +49,10 @@ function update() {
 function ol() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
+    ctx.fillRect(50,50,70,50);
     timer = setInterval(update, 15);
 canvas.addEventListener('touchend', function() {
     ctx.clearRect(0, 0, w, h);
-    ctx.fillRect(50,50,70,50);
 });
 canvas.addEventListener('touchmove', function(event) {
   event.preventDefault();
