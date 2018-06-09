@@ -33,8 +33,6 @@
           relX = objX - x;
           relY = objY - y;
         }
-//ブラウザスクロールを止める
-e.preventDefault();
       }
       function onMove(e) {
         var offsetX = canvas.getBoundingClientRect().left;
@@ -55,9 +53,9 @@ e.preventDefault();
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillRect(objX, objY, objWidth, objHeight);
       }
-      canvas.addEventListener('mousedown', onDown, false);
-      canvas.addEventListener('mousemove', onMove, false);
-      canvas.addEventListener('mouseup', onUp, false);
+      canvas.addEventListener('touchstart', onDown, false);
+      canvas.addEventListener('touchmove', onMove, false);
+      canvas.addEventListener('touchend', onUp, false);
     </script>
   </body>
 </html>
