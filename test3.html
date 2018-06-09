@@ -7,6 +7,9 @@
 body { margin: 0px; overflow: hidden; }
 canvas { border: 1px solid black; }
 </style>
+    p{
+      background-image: url("./desk.png")
+    }
 <script type="text/javascript" src="magictouch.js"></script>
 <script type="text/javascript">
 var canvas;
@@ -49,11 +52,6 @@ function update() {
 function ol() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
-
-    var image = new Image();
-    image.src = 'desk.png';
-    ctx.drawImage(image, 0, 0, 150, 100);
-
     timer = setInterval(update, 15);
 canvas.addEventListener('touchend', function() {
     ctx.clearRect(0, 0, w, h);
@@ -69,9 +67,9 @@ canvas.addEventListener('touchstart', function(event) {
 </script>
 </head>
 <body onload="ol()">
-    
+<p>
 <canvas id="canvas" width="300" height="300" style="top:0px; left:0px; width: 300px; height: 300px;"></canvas>
 <object id="tuio" type="application/x-tuio">Plugin FAILED to load</object>
-
+</p>
 </body>
 </html>
