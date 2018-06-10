@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Enikki Ver.0004</title>
+    <title>Touch Enikki Ver.0005</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
 <style type="text/css">
 body { margin: 0px; overflow: hidden; }
@@ -38,6 +38,7 @@ function update() {
         var touch = touches[i];
     var px = touch.pageX;
     var py = touch.pageY;
+    drawRect();
         ctx.drawImage(image, 0, 0, 450, 300);
         ctx.beginPath();
         ctx.arc(px, py, 20, 0, 2*Math.PI, true);
@@ -58,6 +59,16 @@ function update() {
     }
     updateStarted = false;
 }
+
+function drawRect() {
+    //線スタイルに青色を指定する
+    ctx.strokeStyle = "rgb(0,204,255)";
+    //線の幅10を指定する
+    ctx.lineWidth = 10;
+    //左から20上から20の位置に幅50高さ50の輪郭の四角形を描く
+    ctx.strokeRect(0,275,370,275);
+}
+
 function ol() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
