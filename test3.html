@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Tracker Marker Ver.0014</title>
+    <title>Touch Tracker Marker Ver.0015</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
 <style type="text/css">
 body { margin: 0px; overflow: hidden; }
@@ -38,6 +38,7 @@ function update() {
         var touch = touches[i];
     var px = touch.pageX;
     var py = touch.pageY;
+        ctx.drawImage(image, 0, 0, 450, 300);
         ctx.beginPath();
         ctx.arc(px, py, 20, 0, 2*Math.PI, true);
         ctx.fillStyle = "rgba(0, 0, 200, 0.2)";
@@ -45,7 +46,6 @@ function update() {
         ctx.lineWidth = 2.0;
         ctx.strokeStyle = "rgba(0, 0, 200, 0.8)";
         ctx.stroke();
-        ctx.drawImage(image, 0, 0, 450, 300);
     console.log('drawn circle at ' + px +',' + py);
     }
     updateStarted = false;
