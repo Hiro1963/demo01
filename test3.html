@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Tracker Marker Ver.0018</title>
+    <title>Touch Tracker Marker Ver.0019</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
 <style type="text/css">
 body { margin: 0px; overflow: hidden; }
@@ -24,7 +24,7 @@ function update() {
     updateStarted = true;
     var nw = window.innerWidth;
     var nh = window.innerHeight;
-    if ((w != nw) || (h != nh)) {
+    if ((w == nw) || (h == nh)) {
         w = nw;
         h = nh;
         canvas.style.width = w+'px';
