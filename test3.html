@@ -24,13 +24,13 @@ function update() {
     updateStarted = true;
     var nw = window.innerWidth;
     var nh = window.innerHeight;
-    if ((w == nw) || (h == nh)) {
+    if ((w != nw) || (h != nh)) {
         w = nw;
         h = nh;
-        canvas.style.width = w+'px';
-        canvas.style.height = h+'px';
-        canvas.width = w;
-        canvas.height = h;
+//        canvas.style.width = w+'px';
+//        canvas.style.height = h+'px';
+//        canvas.width = w;
+//        canvas.height = h;
     }
     ctx.clearRect(0, 0, w, h);
     var i, len = touches.length;
@@ -70,7 +70,7 @@ canvas.addEventListener('touchstart', function(event) {
 <body onload="ol()">
     
 <canvas id="canvas" width="300" height="300" style="top:0px; left:0px; width: 300px; height: 300px;"></canvas>
-<object id="tuio" type="application/x-tuio">Plugin FAILED to load</object>
+//<object id="tuio" type="application/x-tuio">Plugin FAILED to load</object>
 
 </body>
 </html>
