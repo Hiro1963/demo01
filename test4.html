@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Enikki Ver.0014</title>
+    <title>Touch Enikki Ver.0015</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -63,6 +63,8 @@ function update() {
 }
 
 function drawRect() {
+    //角を丸く
+    ctx.lineCap = 'round';
     //線スタイルに青色を指定する
     ctx.strokeStyle = "rgb(0,204,255)";
     //線の幅10を指定する
