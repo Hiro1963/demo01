@@ -1,224 +1,71 @@
-<!DOCTYPE html>
+
 <html>
-  <head>
-    <title>Touch Enikki Ver.0027</title>
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, user-scalable=no">
-<style type="text/css">
-body { margin: 0px; overflow: hidden; }
-canvas { border: 1px solid black; }
-</style>
-<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-<script type="text/javascript" src="magictouch.js"></script>
-<script type="text/javascript">
-var canvas;
-var ctx;
-var w = 0;
-var h = 0;
-var timer;
-var updateStarted = false;
-var swWhen = false;
-var touches = [];
-var image = new Image();
-image.src = 'desk.png';
+<head>
+  <meta charset="utf-8" />
+  <title>Touch Enikki Ver.0028</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="stylesheet" href="css/base.css" />
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script>
+    // 読み込みが終わってから初期化
+    window.addEventListener("load", init);
+    function init() {
+      // 初期化
+      var stage = new createjs.Stage("myCanvas");
 
-function update() {
-    if (updateStarted) return;
-    updateStarted = true;
-    var nw = window.innerWidth;
-    var nh = window.innerHeight;
-    if ((w != nw) || (h != nh)) {
-        w = nw;
-        h = nh;
-//        canvas.style.width = w+'px';
-//        canvas.style.height = h+'px';
-//        canvas.width = w;
-//        canvas.height = h;
+      // ボールの半径
+      var radius = 50;
+      // ドラッグした場所を保存する変数
+      var dragPointX;
+      var dragPointY;
+
+      //　ボールを作成
+      var ball = new createjs.Shape();
+      ball.graphics.beginFill("DarkRed").drawCircle(0, 0, radius);
+      ball.x = stage.canvas.width / 2; // 画面中央に配置
+      ball.y = stage.canvas.height / 2;
+      stage.addChild(ball);
+
+      // インタラクティブの設定
+      ball.addEventListener("mousedown", handleDown);
+      ball.addEventListener("pressmove", handleMove);
+      ball.addEventListener("pressup", handleUp);
+
+      // ボールを押したときの処理です
+      function handleDown(event) {
+        // ドラッグを開始した座標を覚えておく
+        dragPointX = stage.mouseX - ball.x;
+        dragPointY = stage.mouseY - ball.y;
+
+        // ボールを半透明にする
+        ball.alpha = 0.5;
+      }
+
+      // ボールを押した状態で動かしたときの処理です
+      function handleMove(event) {
+        // ボールはマウス座標に追随する
+        // ただしドラッグ開始地点との補正をいれておく
+        ball.x = stage.mouseX - dragPointX;
+        ball.y = stage.mouseY - dragPointY;
+      }
+
+      // ボールからマウスを離したときの処理です
+      function handleUp(event) {
+        // ボールを元の透明度に戻す
+        ball.alpha = 1.0;
+      }
+
+      // 時間経過
+      createjs.Ticker.addEventListener("tick", handleTick);
+      function handleTick() {
+        stage.update(); // 画面更新
+      }
     }
-//    ctx.clearRect(0, 0, w, h);
-    ctx.clearRect(0, 0, 375, 269);
-    var i, len = touches.length;
-    for (i=0; i<len; i++) {
-        var touch = touches[i];
-    var px = touch.pageX;
-    var py = touch.pageY;
-//        drawRect();
-//        ctx.drawImage(image, 0, 0, 450, 300);
-        ctx.beginPath();
-        ctx.arc(px, py, 20, 0, 2*Math.PI, true);
-        ctx.fillStyle = "rgba(0, 0, 200, 0.2)";
-        ctx.fill();
-        ctx.lineWidth = 2.0;
-        ctx.strokeStyle = "rgba(0, 0, 200, 0.8)";
-        ctx.stroke();
-        ctx.font = "18px 'ＭＳ Ｐゴシック'";
-//        if(py < 50){
-//           ctx.fillStyle = "red";
-//           ctx.fillText("move to UP!", 0, 150);
-//        }else{
-//           ctx.fillStyle = "blue";
-//           ctx.fillText("move to Down!", 0, 150);
-//        }
-//        if((px >= 0)&&(px <= 93)){
-//            if(swWhen){
-//               ctx.fillStyle = "red";
-//               ctx.fillText("WHEN", 0, 265);
-//            }else{
-//               ctx.fillStyle = "blue";
-//               ctx.fillText("WHEN", 0, 265);
-//            }
-//               swWhen = true;
-//        }else{
-//           swWhen = false;
-//        }
-    console.log('drawn circle at ' + px +',' + py);
-    }
-    updateStarted = false;
-}
-
-function drawRect() {
-    //線スタイルに青色を指定する
-    ctx.strokeStyle = "rgb(0,204,255)";
-    //線の幅10を指定する
-    ctx.lineWidth = 10;
-    //左から20上から30の位置に幅50高さ60の輪郭の四角形を描く
-//    ctx.strokeRect(20,30,50,60);
-    ctx.strokeRect(2,311,372,275);
-}
-
-function myButton() {
-  // Stageオブジェクトを作成。表示リストのルートになります。
-  var stage = new createjs.Stage("canvas");
-  stage.enableMouseOver();
-
-  // ボタンを作成
-  var btn1 = createButton("WHEN", 93, 40, "#0275d8");
-  btn1.x = 0;
-  btn1.y = 270;
-  stage.addChild(btn1);
-
-  var btn2 = createButton("WHERE", 93, 40, "#d9534f");
-  btn2.x = 93.75;
-  btn2.y = 270;
-  stage.addChild(btn2);
-
-  var btn3 = createButton("WHO", 93, 40, "#5cb85c");
-  btn3.x = 187.5;
-  btn3.y = 270;
-  stage.addChild(btn3);
-
-  var btn4 = createButton("WHAT", 93, 40, "#5cb85c");
-  btn4.x = 281.25;
-  btn4.y = 270;
-  stage.addChild(btn4);
-
-  // イベントを登録
-  btn1.addEventListener("click", handleClick);
-  btn2.addEventListener("click", handleClick);
-  btn3.addEventListener("click", handleClick);
-  btn4.addEventListener("click", handleClick);
-  function handleClick(event) {
-     drawRect();
-    // クリックされた時の処理を記述
-    alert(event.currentTarget + " がクリックされました。");
-    stage.update();
-  }
-
-
-  // 時間経過のイベント
-  createjs.Ticker.addEventListener("tick", handleTick);
-  function handleTick() {
-    // Stageの描画を更新
-//    stage.update();
-  }
-}
-
-/**
- * CreateJSのボタンを作成する関数です。
- * この関数でボタンを作ったらステージに追加したり、クリックイベントを登録しましょう。
- * @param {String} text ボタンのラベル文言です。
- * @param {Number} width ボタンの横幅(単位はpx)です。
- * @param {Number} height ボタンの高さ(単位はpx)です。
- * @param {String} keyColor ボタンのキーカラーです。
- * @returns {createjs.Container} ボタンの参照を返します。
- */
-function createButton(text, width, height, keyColor) {
-
-  // ボタン要素をグループ化
-  var button = new createjs.Container();
-  button.name = text; // ボタンに参考までに名称を入れておく(必須ではない)
-  button.cursor = "pointer"; // ホバー時にカーソルを変更する
-
-  // 通常時の座布団を作成
-  var bgUp = new createjs.Shape();
-  bgUp.graphics
-          .setStrokeStyle(1.0)
-          .beginStroke(keyColor)
-          .beginFill("white")
-          .drawRoundRect(0.5, 0.5, width - 1.0, height - 1.0, 4);
-  button.addChild(bgUp);
-  bgUp.visible = true; // 表示する
-
-  // ロールオーバー時の座布団を作成
-  var bgOver = new createjs.Shape();
-  bgOver.graphics
-          .beginFill(keyColor)
-          .drawRoundRect(0, 0, width, height, 4);
-  bgOver.visible = false; // 非表示にする
-  button.addChild(bgOver);
-
-  // ラベルを作成
-  var label = new createjs.Text(text, "18px sans-serif", keyColor);
-  label.x = width / 2;
-  label.y = height / 2;
-  label.textAlign = "center";
-  label.textBaseline = "middle";
-  button.addChild(label);
-
-  // ロールオーバーイベントを登録
-  button.addEventListener("mouseover", handleMouseOver);
-  button.addEventListener("mouseout", handleMouseOut);
-  function handleMouseOver(event) {
-    bgUp.visble = false;
-    bgOver.visible = true;
-    label.color = "white";
-  }
-
-  function handleMouseOut(event) {
-    bgUp.visble = true;
-    bgOver.visible = false;
-    label.color = keyColor;
-  }
-
-  return button;
-}
-
-function ol() {
-    canvas = document.getElementById('canvas');
-    ctx = canvas.getContext('2d');
-    timer = setInterval(update, 15);
-    
-    canvas.addEventListener('touchend', function() {
-        ctx.clearRect(0, 0, w, h);
-    });
-    canvas.addEventListener('touchmove', function(event) {
-      event.preventDefault();
-      touches = event.touches;
-    });
-    canvas.addEventListener('touchstart', function(event) {
-      console.log('start');
-    });
-    
-    myButton()
-};
-</script>
+  </script>
 </head>
-<body onload="ol()">
-    
-<canvas id="canvas" width="375" height="550" style="top:10px; left:10px; right:10px; bottom:10px; width: 375px; height: 550px;"></canvas>
-<canvas id="canvas2" width="375" height="550" style="top:10px; left:10px; right:10px; bottom:10px; width: 375px; height: 550px;"></canvas>
-<!--<object id="tuio" type="application/x-tuio">Plugin FAILED to load</object>-->
-
+<body>
+  <canvas id="myCanvas" width="375" height="550"></canvas>
 </body>
 </html>
