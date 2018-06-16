@@ -2,25 +2,37 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0001</title>
+  <title>Touch Enikki Ver.0013</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <link rel="stylesheet" href="css/base.css" />
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script>
-    // 読み込みが終わってから初期化
-    window.addEventListener("load", init);
+    var stage
+
+    window.addEventListener("load", main);
+
+    function main() {
+      // 読み込みが終わってから初期化
+      init();
+    }
+
     function init() {
       // ステージを作成
-      var stage = new createjs.Stage("myCanvas");
+      stage = new createjs.Stage("myCanvas");
 
       // タッチ操作をサポートしているブラウザーならば
       if (createjs.Touch.isSupported() == true) {
         // タッチ操作を有効にします。
         createjs.Touch.enable(stage)
       }
+      
+      DyWord();
+      DyButton();
+    }
 
+    function DyWord() {
       // オブジェクトの作成
       var shape = new createjs.Shape();
       shape.graphics.beginFill("DarkRed").drawCircle(0, 0, 40);
@@ -38,7 +50,104 @@
         stage.update();
       }
     }
-  </script>
+
+    function DyButton() {
+      stage.enableMouseOver();
+
+      // ボタンを作成
+      var btn1 = createButton("WHEN", 93, 40, "#0275d8");
+      btn1.x = 0;
+      btn1.y = 270;
+      stage.addChild(btn1);
+
+      var btn2 = createButton("WHERE", 93, 40, "#d9534f");
+      btn2.x = 93.75;
+      btn2.y = 270;
+      stage.addChild(btn2);
+
+      var btn3 = createButton("WHO", 93, 40, "#5cb85c");
+      btn3.x = 187.5;
+      btn3.y = 270;
+      stage.addChild(btn3);
+
+      var btn4 = createButton("WHAT", 93, 40, "#5cb85c");
+      btn4.x = 281.25;
+      btn4.y = 270;
+      stage.addChild(btn4);
+
+      // イベントを登録
+      btn1.addEventListener("click", handleClick);
+      btn2.addEventListener("click", handleClick);
+      btn3.addEventListener("click", handleClick);
+      btn4.addEventListener("click", handleClick);
+      function handleClick(event) {
+      // クリックされた時の処理を記述
+//         drawRect();
+      // alert(event.currentTarget + " がクリックされました。");
+      }
+    }
+
+	/**
+	 * CreateJSのボタンを作成する関数です。
+	 * この関数でボタンを作ったらステージに追加したり、クリックイベントを登録しましょう。
+	 * @param {String} text ボタンのラベル文言です。
+	 * @param {Number} width ボタンの横幅(単位はpx)です。
+	 * @param {Number} height ボタンの高さ(単位はpx)です。
+	 * @param {String} keyColor ボタンのキーカラーです。
+	 * @returns {createjs.Container} ボタンの参照を返します。
+	 */
+	function createButton(text, width, height, keyColor) {
+
+	  // ボタン要素をグループ化
+	  var button = new createjs.Container();
+	  button.name = text; // ボタンに参考までに名称を入れておく(必須ではない)
+	  button.cursor = "pointer"; // ホバー時にカーソルを変更する
+
+	  // 通常時の座布団を作成
+	  var bgUp = new createjs.Shape();
+	  bgUp.graphics
+	          .setStrokeStyle(1.0)
+	          .beginStroke(keyColor)
+	          .beginFill("white")
+	          .drawRoundRect(0.5, 0.5, width - 1.0, height - 1.0, 4);
+	  button.addChild(bgUp);
+	  bgUp.visible = true; // 表示する
+
+	  // ロールオーバー時の座布団を作成
+	  var bgOver = new createjs.Shape();
+	  bgOver.graphics
+	          .beginFill(keyColor)
+	          .drawRoundRect(0, 0, width, height, 4);
+	  bgOver.visible = false; // 非表示にする
+	  button.addChild(bgOver);
+
+	  // ラベルを作成
+	  var label = new createjs.Text(text, "18px sans-serif", keyColor);
+	  label.x = width / 2;
+	  label.y = height / 2;
+	  label.textAlign = "center";
+	  label.textBaseline = "middle";
+	  button.addChild(label);
+
+	  // ロールオーバーイベントを登録
+	  button.addEventListener("mouseover", handleMouseOver);
+	  button.addEventListener("mouseout", handleMouseOut);
+	  function handleMouseOver(event) {
+	    bgUp.visble = false;
+	    bgOver.visible = true;
+	    label.color = "white";
+	  }
+
+	  function handleMouseOut(event) {
+	    bgUp.visble = true;
+	    bgOver.visible = false;
+	    label.color = keyColor;
+	  }
+
+	  return button;
+	};
+
+</script>
 </head>
 <body>
   <canvas id="myCanvas" width="375" height="550"></canvas>
