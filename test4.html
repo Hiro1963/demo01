@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0030</title>
+  <title>Touch Enikki Ver.0031</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -15,6 +15,9 @@
     function init() {
       // 初期化
       var stage = new createjs.Stage("myCanvas");
+
+      var text1 = new createjs.Text("init", "24px serif", "DarkRed");
+      stage.addChild(text1);
 
       // ボールの半径
       var radius = 50;
@@ -40,6 +43,7 @@
 
       // ボールを押したときの処理です
       function handleDown(event) {
+        text1.text = "handleDown";
         // ドラッグを開始した座標を覚えておく
         dragPointX = stage.mouseX - ball.x;
         dragPointY = stage.mouseY - ball.y;
@@ -50,6 +54,7 @@
 
       // ボールを押した状態で動かしたときの処理です
       function handleMove(event) {
+        text1.text = "handleMove";
         // ボールはマウス座標に追随する
         // ただしドラッグ開始地点との補正をいれておく
         ball.x = stage.mouseX - dragPointX;
@@ -58,6 +63,7 @@
 
       // ボールからマウスを離したときの処理です
       function handleUp(event) {
+        text1.text = "handleUp";
         // ボールを元の透明度に戻す
         ball.alpha = 1.0;
       }
