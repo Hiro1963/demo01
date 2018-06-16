@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Enikki Ver.0026</title>
+    <title>Touch Enikki Ver.0027</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -122,6 +122,7 @@ function myButton() {
      drawRect();
     // クリックされた時の処理を記述
     alert(event.currentTarget + " がクリックされました。");
+    stage.update();
   }
 
 
@@ -129,7 +130,7 @@ function myButton() {
   createjs.Ticker.addEventListener("tick", handleTick);
   function handleTick() {
     // Stageの描画を更新
-    stage.update();
+//    stage.update();
   }
 }
 
@@ -216,6 +217,7 @@ function ol() {
 <body onload="ol()">
     
 <canvas id="canvas" width="375" height="550" style="top:10px; left:10px; right:10px; bottom:10px; width: 375px; height: 550px;"></canvas>
+<canvas id="canvas2" width="375" height="550" style="top:10px; left:10px; right:10px; bottom:10px; width: 375px; height: 550px;"></canvas>
 <!--<object id="tuio" type="application/x-tuio">Plugin FAILED to load</object>-->
 
 </body>
