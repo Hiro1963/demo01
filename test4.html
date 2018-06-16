@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0037</title>
+  <title>Touch Enikki Ver.0039</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -37,15 +37,6 @@
     }
 
     function DyWord() {
-      // オブジェクトの作成
-//      var shape = new createjs.Shape();
-//      shape.graphics.beginFill("DarkRed").drawCircle(0, 0, 40);
-//      stage.addChild(shape);
-
-//      var shape = new createjs.Bitmap("star.png");
-//      stage.addChild(shape);
-
-
       // tick イベントを登録する
       createjs.Ticker.addEventListener("tick", handleTick);
 
@@ -55,9 +46,6 @@
 	        DyMvShape.x = stage.mouseX;
 	        DyMvShape.y = stage.mouseY;
 	    }
-	    else {
-//		    MoveStarted = true;
-        }
 
         // 画面を更新する
         stage.update();
@@ -65,6 +53,7 @@
     }
 
     function DyShapeDef() {
+		// オブジェクトの作成
 	    var Dyshape1 = new createjs.Bitmap("star.png");
 	    Dyshape1.x = 15;
 	    Dyshape1.y = 325;
@@ -78,6 +67,8 @@
 		// イベントを登録
 		Dyshape1.addEventListener("click", handleClick);
 		Dyshape2.addEventListener("click", handleClick);
+		Dyshape1.addEventListener("touchstart", handleClick);
+		Dyshape2.addEventListener("touchstart", handleClick);
 		function handleClick(event) {
 			// クリックされた時の処理を記述
 			DyMvShape = event.target;
