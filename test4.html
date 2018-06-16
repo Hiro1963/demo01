@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Enikki Ver.0025</title>
+    <title>Touch Enikki Ver.0026</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -43,7 +43,7 @@ function update() {
         var touch = touches[i];
     var px = touch.pageX;
     var py = touch.pageY;
-        drawRect();
+//        drawRect();
 //        ctx.drawImage(image, 0, 0, 450, 300);
         ctx.beginPath();
         ctx.arc(px, py, 20, 0, 2*Math.PI, true);
@@ -84,7 +84,7 @@ function drawRect() {
     ctx.lineWidth = 10;
     //左から20上から30の位置に幅50高さ60の輪郭の四角形を描く
 //    ctx.strokeRect(20,30,50,60);
-    ctx.strokeRect(2,270,372,275);
+    ctx.strokeRect(2,311,372,275);
 }
 
 function myButton() {
@@ -119,6 +119,7 @@ function myButton() {
   btn3.addEventListener("click", handleClick);
   btn4.addEventListener("click", handleClick);
   function handleClick(event) {
+     drawRect();
     // クリックされた時の処理を記述
     alert(event.currentTarget + " がクリックされました。");
   }
