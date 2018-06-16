@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0013</title>
+  <title>Touch Enikki Ver.0020</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -82,7 +82,7 @@
       btn4.addEventListener("click", handleClick);
       function handleClick(event) {
       // クリックされた時の処理を記述
-//         drawRect();
+      DyDrawRect();
       // alert(event.currentTarget + " がクリックされました。");
       }
     }
@@ -145,7 +145,32 @@
 	  }
 
 	  return button;
-	};
+	}
+
+	function DyDrawRect() {
+	
+		//Graphicsオブジェクトを作成する
+	    var g = new createjs.Graphics();
+
+		//線の色を指定
+	    g.beginStroke("#00ffff");
+
+		//塗りつぶしの色を作成
+//	    g.beginFill("#ffffff");
+
+		// 線の幅を指定
+		g.setStrokeStyle(5);
+
+		//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
+	    g.drawRoundRect(2,311,372,238,30);
+
+		//Displayオブジェクトを作成
+	    var shape=new createjs.Shape(g);
+
+		//シェイプオブジェクトをステージに追加する
+	    stage.addChild(shape);
+     
+	}
 
 </script>
 </head>
