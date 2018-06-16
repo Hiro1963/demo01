@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0031</title>
+  <title>Touch Enikki Ver.0032</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -54,6 +54,7 @@
 
       // ボールを押した状態で動かしたときの処理です
       function handleMove(event) {
+        event.preventDefault();
         text1.text = "handleMove";
         // ボールはマウス座標に追随する
         // ただしドラッグ開始地点との補正をいれておく
