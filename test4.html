@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0026</title>
+  <title>Touch Enikki Ver.0033</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -10,17 +10,20 @@
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script>
     var stage
-	var image = [];
-	image = new Image();
-	image.src = 'desk.png';
-	image = new Image();
-	image.src = 'star.png';
+	var Dyshapes = [];
+    var Dyshape = new createjs.Bitmap("star.png");
+    Dyshape.x = 100;
+    Dyshape.y = 325;
+    var DyMvShape = Dyshape;
+    var MoveStarted = false;
 
     window.addEventListener("load", main);
 
     function main() {
       // 読み込みが終わってから初期化
       init();
+      DyWord();
+      DyButton();
     }
 
     function init() {
@@ -33,8 +36,6 @@
         createjs.Touch.enable(stage)
       }
       
-      DyWord();
-      DyButton();
     }
 
     function DyWord() {
@@ -43,16 +44,23 @@
 //      shape.graphics.beginFill("DarkRed").drawCircle(0, 0, 40);
 //      stage.addChild(shape);
 
-      var shape = new createjs.Bitmap("star.png");
-      stage.addChild(shape);
+//      var shape = new createjs.Bitmap("star.png");
+//      stage.addChild(shape);
+
+      stage.addChild(Dyshape);
 
       // tick イベントを登録する
       createjs.Ticker.addEventListener("tick", handleTick);
 
       function handleTick(event) {
-        // シェイプをマウスに追随させる
-        shape.x = stage.mouseX;
-        shape.y = stage.mouseY;
+	    if (true == MoveStarted) {
+	        // シェイプをマウスに追随させる
+	        DyMvShape.x = stage.mouseX;
+	        DyMvShape.y = stage.mouseY;
+	    }
+	    else {
+//		    MoveStarted = true;
+        }
 
         // 画面を更新する
         stage.update();
@@ -91,7 +99,7 @@
       function handleClick(event) {
       // クリックされた時の処理を記述
       DyDrawRect();
-      // alert(event.currentTarget + " がクリックされました。");
+		alert(event.currentTarget + " がクリックされました。");
       }
     }
 
