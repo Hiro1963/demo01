@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Enikki Ver.0021</title>
+    <title>Touch Enikki Ver.0022</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -187,7 +187,7 @@ function createButton(text, width, height, keyColor) {
 function ol() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
-    timer = setInterval(update, 15);
+//    timer = setInterval(update, 15);
     
     canvas.addEventListener('touchend', function() {
         ctx.clearRect(0, 0, w, h);
