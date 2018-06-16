@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Enikki Ver.0024</title>
+    <title>Touch Enikki Ver.0025</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -36,7 +36,8 @@ function update() {
 //        canvas.width = w;
 //        canvas.height = h;
     }
-    ctx.clearRect(0, 0, w, h);
+//    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, 375, 269);
     var i, len = touches.length;
     for (i=0; i<len; i++) {
         var touch = touches[i];
@@ -59,18 +60,18 @@ function update() {
 //           ctx.fillStyle = "blue";
 //           ctx.fillText("move to Down!", 0, 150);
 //        }
-        if((px >= 0)&&(px <= 93)){
-            if(swWhen){
-               ctx.fillStyle = "red";
-               ctx.fillText("WHEN", 0, 265);
-            }else{
-               ctx.fillStyle = "blue";
-               ctx.fillText("WHEN", 0, 265);
-            }
-               swWhen = true;
-        }else{
-           swWhen = false;
-        }
+//        if((px >= 0)&&(px <= 93)){
+//            if(swWhen){
+//               ctx.fillStyle = "red";
+//               ctx.fillText("WHEN", 0, 265);
+//            }else{
+//               ctx.fillStyle = "blue";
+//               ctx.fillText("WHEN", 0, 265);
+//            }
+//               swWhen = true;
+//        }else{
+//           swWhen = false;
+//        }
     console.log('drawn circle at ' + px +',' + py);
     }
     updateStarted = false;
@@ -92,25 +93,31 @@ function myButton() {
   stage.enableMouseOver();
 
   // ボタンを作成
-  var btn1 = createButton("Click Blue!", 150, 40, "#0275d8");
-  btn1.x = 50;
-  btn1.y = 80;
+  var btn1 = createButton("WHEN", 93, 40, "#0275d8");
+  btn1.x = 0;
+  btn1.y = 270;
   stage.addChild(btn1);
 
-  var btn2 = createButton("Click Red!", 150, 40, "#d9534f");
-  btn2.x = 240;
-  btn2.y = 80;
+  var btn2 = createButton("WHERE", 93, 40, "#d9534f");
+  btn2.x = 93.75;
+  btn2.y = 270;
   stage.addChild(btn2);
 
-  var btn3 = createButton("Click Green!", 150, 40, "#5cb85c");
-  btn3.x = 430;
-  btn3.y = 80;
+  var btn3 = createButton("WHO", 93, 40, "#5cb85c");
+  btn3.x = 187.5;
+  btn3.y = 270;
   stage.addChild(btn3);
+
+  var btn4 = createButton("WHAT", 93, 40, "#5cb85c");
+  btn4.x = 281.25;
+  btn4.y = 270;
+  stage.addChild(btn4);
 
   // イベントを登録
   btn1.addEventListener("click", handleClick);
   btn2.addEventListener("click", handleClick);
   btn3.addEventListener("click", handleClick);
+  btn4.addEventListener("click", handleClick);
   function handleClick(event) {
     // クリックされた時の処理を記述
     alert(event.currentTarget + " がクリックされました。");
@@ -188,7 +195,7 @@ function createButton(text, width, height, keyColor) {
 function ol() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
-//    timer = setInterval(update, 15);
+    timer = setInterval(update, 15);
     
     canvas.addEventListener('touchend', function() {
         ctx.clearRect(0, 0, w, h);
