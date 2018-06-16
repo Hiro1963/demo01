@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0025</title>
+  <title>Touch Enikki Ver.0026</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -10,6 +10,11 @@
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script>
     var stage
+	var image = [];
+	image = new Image();
+	image.src = 'desk.png';
+	image = new Image();
+	image.src = 'star.png';
 
     window.addEventListener("load", main);
 
@@ -34,8 +39,11 @@
 
     function DyWord() {
       // オブジェクトの作成
-      var shape = new createjs.Shape();
-      shape.graphics.beginFill("DarkRed").drawCircle(0, 0, 40);
+//      var shape = new createjs.Shape();
+//      shape.graphics.beginFill("DarkRed").drawCircle(0, 0, 40);
+//      stage.addChild(shape);
+
+      var shape = new createjs.Bitmap("star.png");
       stage.addChild(shape);
 
       // tick イベントを登録する
