@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0049</title>
+  <title>Touch Enikki Ver.0050</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -73,14 +73,14 @@
 	    stage.addChild(Dyshape2);
 
 		// イベントを登録
-//		Dyshape1.addEventListener("click", handleClick);
-//		Dyshape2.addEventListener("click", handleClick);
+		Dyshape1.addEventListener("click", handleClick);
+		Dyshape2.addEventListener("click", handleClick);
 //		Dyshape1.addEventListener("touchstart", handleClick);
 //		Dyshape2.addEventListener("touchend", handleClick);
-		Dyshape1.addEventListener("mouseover", handleClick);
-		Dyshape2.addEventListener("mouseout", handleClick);
+//		Dyshape1.addEventListener("mouseover", handleClick);
+//		Dyshape2.addEventListener("mouseout", handleClick);
 		function handleClick(event) {
-	        text1.text = event.currentTarget;
+//	        text1.text = event.currentTarget;
  			// クリックされた時の処理を記述
 			DyMvShape = event.target;
 		    if (true == MoveStarted) {
