@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0046</title>
+  <title>Touch Enikki Ver.0047</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -32,7 +32,7 @@
 
       // タッチ操作をサポートしているブラウザーならば
       if (createjs.Touch.isSupported() == true) {
-		alert("タッチ操作をサポート");
+//		alert("タッチ操作をサポート");
         // タッチ操作を有効にします。
         createjs.Touch.enable(stage)
       }
@@ -70,10 +70,12 @@
 		// イベントを登録
 //		Dyshape1.addEventListener("click", handleClick);
 //		Dyshape2.addEventListener("click", handleClick);
-		Dyshape1.addEventListener("touchstart", handleClick);
-		Dyshape2.addEventListener("touchend", handleClick);
+//		Dyshape1.addEventListener("touchstart", handleClick);
+//		Dyshape2.addEventListener("touchend", handleClick);
+		Dyshape1.addEventListener("mouseover", handleClick);
+		Dyshape2.addEventListener("mouseout", handleClick);
 		function handleClick(event) {
-			alert(event.currentTarget + " がクリックされました。");
+//		alert(event.currentTarget + " がクリックされました。");
  			// クリックされた時の処理を記述
 			DyMvShape = event.target;
 		    if (true == MoveStarted) {
