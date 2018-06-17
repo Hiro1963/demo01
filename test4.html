@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0071</title>
+  <title>Touch Enikki Ver.0072</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -89,14 +89,14 @@
 		// イベントを登録
 		for (var i=0; i<Dyshapes.length; i++) {
 //			Dyshapes[i].addEventListener("click", handleClick);
-//			Dyshapes[i].addEventListener("pressup", handleClick);
-			Dyshapes[i].addEventListener("pressmove", handleClick);
+			Dyshapes[i].addEventListener("pressup", handlePressUp);
+			Dyshapes[i].addEventListener("pressmove", handlePressMove);
 		}
 
 		for (var i=0; i<Dyshapes2.length; i++) {
 //			Dyshapes2[i].addEventListener("click", handleClick);
-//			Dyshapes2[i].addEventListener("pressup", handleClick);
-			Dyshapes2[i].addEventListener("pressmove", handleClick);
+			Dyshapes2[i].addEventListener("pressup", handlePressUp);
+			Dyshapes2[i].addEventListener("pressmove", handlePressMove);
 		}
 
 		// イベントを登録
