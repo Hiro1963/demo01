@@ -10,7 +10,7 @@
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script>
     var stage
-    var stageW
+//    var stageW
 	var Dyshapes = [];
     var DyMvShape
     var MoveStarted = false;
@@ -28,7 +28,7 @@
     function init() {
       // ステージを作成
       stage = new createjs.Stage("myCanvas");
-      stageW = new createjs.Stage("myCanvas");
+//      stageW = new createjs.Stage("myCanvas");
 
       // タッチ操作をサポートしているブラウザーならば
       if (createjs.Touch.isSupported() == true) {
@@ -69,16 +69,16 @@
 		// イベントを登録
 		Dyshape1.addEventListener("click", handleClick);
 		Dyshape2.addEventListener("click", handleClick);
-		Dyshape1.addEventListener("touchstart", handleClick);
-		Dyshape2.addEventListener("touchend", handleClick);
+//		Dyshape1.addEventListener("touchstart", handleClick);
+//		Dyshape2.addEventListener("touchend", handleClick);
 		function handleClick(event) {
 			// クリックされた時の処理を記述
 			DyMvShape = event.target;
 		    if (true == MoveStarted) {
 				MoveStarted = false;
-				if (DyMvShape.y < 270 ) {
-					stageW.addChild(DyMvShape);
-				}
+//				if (DyMvShape.y < 270 ) {
+//					stageW.addChild(DyMvShape);
+//				}
 			}
 			else {
 				MoveStarted = true;
