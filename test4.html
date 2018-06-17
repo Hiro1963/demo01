@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0047</title>
+  <title>Touch Enikki Ver.0049</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -14,6 +14,7 @@
 	var Dyshapes = [];
     var DyMvShape
     var MoveStarted = false;
+    var text1;
 
     window.addEventListener("load", main);
 
@@ -36,6 +37,10 @@
         // タッチ操作を有効にします。
         createjs.Touch.enable(stage)
       }
+      stage.enableMouseOver();
+      
+      text1 = new createjs.Text("init", "24px serif", "DarkRed");
+      stage.addChild(text1);
       
     }
 
@@ -75,7 +80,7 @@
 		Dyshape1.addEventListener("mouseover", handleClick);
 		Dyshape2.addEventListener("mouseout", handleClick);
 		function handleClick(event) {
-//		alert(event.currentTarget + " がクリックされました。");
+	        text1.text = event.currentTarget;
  			// クリックされた時の処理を記述
 			DyMvShape = event.target;
 		    if (true == MoveStarted) {
@@ -91,7 +96,7 @@
     }
 
     function DyButton() {
-      stage.enableMouseOver();
+//      stage.enableMouseOver();
 
       // ボタンを作成
       var btn1 = createButton("WHEN", 93, 40, "#0275d8");
