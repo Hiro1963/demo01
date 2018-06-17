@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0074</title>
+  <title>Touch Enikki Ver.0075</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -118,7 +118,14 @@
 				MoveStarted = false;
 		        // 絵にあるか？
 				if (DyMvShape.y < 270 ) {
-					Dyshapes3.push(DyMvShape);
+					for (var i=0; i<Dyshapes3.length; i++) {
+						if(Dyshapes3[i].name == DyMvShape.name) {
+							break;
+						}
+					}
+					if (i == Dyshapes3.length) {
+						Dyshapes3.push(DyMvShape);
+					}
 				}
 				else {
 					for (var i=0; i<Dyshapes3.length; i++) {
