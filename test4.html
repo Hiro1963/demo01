@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0050</title>
+  <title>Touch Enikki Ver.0054</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -12,6 +12,7 @@
     var stage
 //    var stageW
 	var Dyshapes = [];
+ 	var Dyshapes2 = [];
     var DyMvShape
     var MoveStarted = false;
     var text1;
@@ -61,38 +62,63 @@
     }
 
     function DyShapeDef() {
-		// オブジェクトの作成
+		// オブジェクト(WHEN)の作成
 	    var Dyshape1 = new createjs.Bitmap("star.png");
 	    Dyshape1.x = 15;
 	    Dyshape1.y = 325;
-	    stage.addChild(Dyshape1);
+	    Dyshapes.push(Dyshape1);
 
 	    var Dyshape2 = new createjs.Bitmap("star2.png");
 	    Dyshape2.x = 100;
 	    Dyshape2.y = 325;
-	    stage.addChild(Dyshape2);
+	    Dyshapes.push(Dyshape2);
+
+		// オブジェクト(WHERE)の作成
+	    var Dyshape1 = new createjs.Bitmap("star3.png");
+	    Dyshape1.x = 15;
+	    Dyshape1.y = 325;
+	    Dyshapes2.push(Dyshape1);
+
+	    var Dyshape2 = new createjs.Bitmap("star4.png");
+	    Dyshape2.x = 100;
+	    Dyshape2.y = 325;
+	    Dyshapes2.push(Dyshape2);
 
 		// イベントを登録
-		Dyshape1.addEventListener("click", handleClick);
-		Dyshape2.addEventListener("click", handleClick);
-//		Dyshape1.addEventListener("touchstart", handleClick);
-//		Dyshape2.addEventListener("touchend", handleClick);
-//		Dyshape1.addEventListener("mouseover", handleClick);
-//		Dyshape2.addEventListener("mouseout", handleClick);
+//		var i, len = Dyshapes.length;
+		for (var i=0; i<Dyshapes.length; i++) {
+			Dyshapes[i].addEventListener("click", handleClick);
+		}
+
+		for (var i=0; i<Dyshapes2.length; i++) {
+			Dyshapes2[i].addEventListener("click", handleClick);
+		}
+
+		// イベントを登録
+//		Dyshape1.addEventListener("click", handleClick);
+//		Dyshape2.addEventListener("click", handleClick);
 		function handleClick(event) {
-//	        text1.text = event.currentTarget;
  			// クリックされた時の処理を記述
 			DyMvShape = event.target;
 		    if (true == MoveStarted) {
 				MoveStarted = false;
-//				if (DyMvShape.y < 270 ) {
-//					stageW.addChild(DyMvShape);
-//				}
 			}
 			else {
 				MoveStarted = true;
 			}
 		}
+    }
+
+    function DyObjClearALL() {
+    
+		for (var i=0; i<Dyshapes.length; i++) {
+	    	stage.removeChild(Dyshapes[i]);
+	    }
+
+		for (var i=0; i<Dyshapes2.length; i++) {
+	    	stage.removeChild(Dyshapes2[i]);
+	    }
+    
     }
 
     function DyButton() {
@@ -120,15 +146,42 @@
       stage.addChild(btn4);
 
       // イベントを登録
-      btn1.addEventListener("click", handleClick);
-      btn2.addEventListener("click", handleClick);
-      btn3.addEventListener("click", handleClick);
-      btn4.addEventListener("click", handleClick);
-      function handleClick(event) {
+      btn1.addEventListener("click", handleClick1);
+      btn2.addEventListener("click", handleClick2);
+      btn3.addEventListener("click", handleClick3);
+      btn4.addEventListener("click", handleClick4);
+
+      function handleClick1(event) {
       // クリックされた時の処理を記述
-      DyDrawRect();
+		alert(event.currentTarget + " がクリックされました。");
+		DyObjClearALL();
+		DyDrawRect();
+		for (var i=0; i<Dyshapes.length; i++) {
+			stage.addChild(Dyshapes[i]);
+		}
+      }
+      function handleClick2(event) {
+      // クリックされた時の処理を記述
+		alert(event.currentTarget + " がクリックされました。");
+		DyObjClearALL();
+		DyDrawRect();
+		for (var i=0; i<Dyshapes2.length; i++) {
+			stage.addChild(Dyshapes2[i]);
+		}
+      }
+      function handleClick3(event) {
+      // クリックされた時の処理を記述
+		DyObjClearALL();
+		DyDrawRect();
 		alert(event.currentTarget + " がクリックされました。");
       }
+      function handleClick4(event) {
+      // クリックされた時の処理を記述
+		DyObjClearALL();
+		DyDrawRect();
+		alert(event.currentTarget + " がクリックされました。");
+      }
+
     }
 
 	/**
