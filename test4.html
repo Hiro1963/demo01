@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0041</title>
+  <title>Touch Enikki Ver.0042</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -10,6 +10,7 @@
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
   <script>
     var stage
+    var stageW
 	var Dyshapes = [];
     var DyMvShape
     var MoveStarted = false;
@@ -27,6 +28,7 @@
     function init() {
       // ステージを作成
       stage = new createjs.Stage("myCanvas");
+      stageW = new createjs.Stage("myCanvas");
 
       // タッチ操作をサポートしているブラウザーならば
       if (createjs.Touch.isSupported() == true) {
@@ -65,15 +67,18 @@
 	    stage.addChild(Dyshape2);
 
 		// イベントを登録
-		Dyshape1.addEventListener("click", handleClick);
-		Dyshape2.addEventListener("click", handleClick);
+//		Dyshape1.addEventListener("click", handleClick);
+//		Dyshape2.addEventListener("click", handleClick);
 		Dyshape1.addEventListener("touchstart", handleClick);
-		Dyshape2.addEventListener("touchstart", handleClick);
+		Dyshape2.addEventListener("touchend", handleClick);
 		function handleClick(event) {
 			// クリックされた時の処理を記述
 			DyMvShape = event.target;
 		    if (true == MoveStarted) {
 				MoveStarted = false;
+				if (DyMvShape.y < 270 ) {
+					stageW.addChild(DyMvShape);
+				}
 			}
 			else {
 				MoveStarted = true;
