@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0035</title>
+  <title>Touch Enikki Ver.0036</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -41,13 +41,13 @@
 //      myCanvas.addEventListener("touchmove", handleMove);
 //      myCanvas.addEventListener("touchend", handleUp);
 
-      stage.addEventListener("touchstart", handleDown);
+      stage.addEventListener("pressmove", handleDown);
       stage.addEventListener("touchmove", handleMove);
       stage.addEventListener("touchend", handleUp);
 
       // ボールを押したときの処理です
       function handleDown(event) {
-        text1.text = "handleDown";
+        text1.text = "pressmove";
         // ドラッグを開始した座標を覚えておく
         dragPointX = stage.mouseX - ball.x;
         dragPointY = stage.mouseY - ball.y;
