@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Touch Enikki Ver.0079</title>
+  <title>Touch Enikki Ver.0097</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -16,6 +16,7 @@
     var DyMvShape
     var MoveStarted = false;
     var text1;
+//    var arrBtnEm = []
 
     window.addEventListener("load", main);
 
@@ -215,6 +216,15 @@
 
       function handleClick1(event) {
       // クリックされた時の処理を記述
+//		arrBtnEm[1].bgUp.visible = true;
+//		arrBtnEm[1].bgOver.visible = false;
+//		var EmbgUp = btn2.getChildAt(0);
+//		var EmbgOver = btn2.getChildAt(1);
+//		var label = btn2.getChildAt(2);
+//		EmbgUp.visible = true;
+		btn2.getChildAt(0).visible = true;
+		btn2.getChildAt(1).visible = false;
+		btn2.getChildAt(2).color = "#d9534f";
 		DyObjClearALL();
 		DyDrawRect();
 		for (var i=0; i<Dyshapes.length; i++) {
@@ -256,6 +266,11 @@
 
     }
 
+//	function arrBtn(bgUp, bgOver) {
+//		this.bgUp = bgUp;
+//		this.bgOver = bgOver;
+//	}
+
 	/**
 	 * CreateJSのボタンを作成する関数です。
 	 * この関数でボタンを作ったらステージに追加したり、クリックイベントを登録しましょう。
@@ -289,6 +304,7 @@
 	          .drawRoundRect(0, 0, width, height, 4);
 	  bgOver.visible = false; // 非表示にする
 	  button.addChild(bgOver);
+//	  arrBtnEm.push(new arrBtn(bgUp, bgOver));
 
 	  // ラベルを作成
 	  var label = new createjs.Text(text, "18px sans-serif", keyColor);
@@ -305,14 +321,14 @@
 	  button.addEventListener("pressmove", handlePressMove);
 	  function handlePressUp(event) {
 		text1.text = "pressup";
-	    bgUp.visble = false;
+	    bgUp.visible = false;
 	    bgOver.visible = true;
 	    label.color = "white";
 	  }
 
 	  function handlePressMove(event) {
 		text1.text = "pressmove";
-	    bgUp.visble = true;
+	    bgUp.visible = true;
 	    bgOver.visible = false;
 	    label.color = keyColor;
 	  }
