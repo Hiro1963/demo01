@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0118</title>
+	<title>Touch Enikki Ver.0120</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -126,17 +126,17 @@
 
 	function DyShapeDef() {
 
-		DyBmpAdd("TYPE_WHEN", "when1.png", "WHEN,TODAY");
-		DyBmpAdd("TYPE_WHEN", "when2.png", "WHENYESTERDAY");
+		DyBmpAdd("TYPE_WHEN", "when1.png", "TYPE_WHEN,in the morning");
+		DyBmpAdd("TYPE_WHEN", "when2.png", "TYPE_WHEN,in the afternoon");
 
-		DyBmpAdd("TYPE_WHERE", "where1.png", "WHERE,SEA");
-		DyBmpAdd("TYPE_WHERE", "where2.png", "WHERE,MOUNTAIN");
+		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,in the sea");
+		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,in the mountains");
 
-		DyBmpAdd("TYPE_WHO", "who1.png", "WHO,I");
-		DyBmpAdd("TYPE_WHO", "who2.png", "WHO,FRIEND");
+		DyBmpAdd("TYPE_WHO", "who1.png", "TYPE_WHO,with my friend");
+		DyBmpAdd("TYPE_WHO", "who2.png", "TYPE_WHO,with my family");
 
-		DyBmpAdd("TYPE_WHAT", "what1.png", "WHO,SWIM");
-		DyBmpAdd("TYPE_WHAT", "what2.png", "WHO,CLIMB");
+		DyBmpAdd("TYPE_WHAT", "what1.png", "TYPE_WHAT,enjoyed swimming");
+		DyBmpAdd("TYPE_WHAT", "what2.png", "TYPE_WHAT,enjoyed climbing");
 		DyShapeRst();
 
 		// イベントを登録
@@ -357,15 +357,7 @@
 			DySwBtn(5);
 			DyObjClear5W();
 			DyDrawRect();
-			//日記を書く
-			text1.text = "";
-			text1.x = 10;
-			text1.y = 325;
-			for (var i=0; i<DyShpDraw.length; i++) {
-				text1.text += DyShpDraw[i].name;
-				text1.text += "\r";
-			}
-			stage.addChild(text1);
+			DyWrite();
 		}
 
 		//CLEAR
@@ -379,6 +371,49 @@
 		}
 
 	}
+
+	function DyWrite() {
+		//日記を書く
+		var words = [];
+
+		for(var i=0;i<DyShpDraw.length; ++i){
+			words[i] = DyShpDraw[i].name.split(',');
+		}
+
+		text1.text = "I";
+		text1.x = 10;
+		text1.y = 325;
+		var index = 1;
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHAT' == words[i][0] ) {
+				text1.text += " ";
+				text1.text += words[i][1];
+			}
+		}
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHO' == words[i][0] ) {
+				text1.text += " ";
+				text1.text += words[i][1];
+			}
+		}
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHERE' == words[i][0] ) {
+				text1.text += "\r";
+				text1.text += " ";
+				text1.text += words[i][1];
+			}
+		}
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHEN' == words[i][0] ) {
+				text1.text += " ";
+				text1.text += words[i][1];
+			}
+		}
+		var len = text1.text.length;
+		text1.text += "\r";
+		stage.addChild(text1);
+	}
+
 
 	function DySwBtn(BtnNo) {
 		if (1 != BtnNo) {
