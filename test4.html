@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0121</title>
+	<title>Touch Enikki Ver.0123</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -20,6 +20,8 @@
 	var MoveStarted = false;
 	var text1;
 	var btn1,btn2,btn3,btn4,btn5
+	var BtnColor = ["#ffffff","#0275d8","#d9534f","#5cb85c","#ff00ff","#0275d8","#808080"];
+
 
 	window.addEventListener("load", main);
 
@@ -267,34 +269,34 @@
 	function DyButton() {
 
 		// ボタンを作成
-		btn1 = createButton("WHEN", 93, 40, "#0275d8");
+		btn1 = createButton("WHEN", 93, 40, BtnColor[1]);
 		btn1.x = 0;
 		btn1.y = 270;
 		stage.addChild(btn1);
 
-		btn2 = createButton("WHERE", 93, 40, "#d9534f");
+		btn2 = createButton("WHERE", 93, 40, BtnColor[2]);
 		btn2.x = 93.75;
 		btn2.y = 270;
 		stage.addChild(btn2);
 
-		btn3 = createButton("WHO", 93, 40, "#5cb85c");
+		btn3 = createButton("WHO", 93, 40, BtnColor[3]);
 		btn3.x = 187.5;
 		btn3.y = 270;
 		stage.addChild(btn3);
 
-		btn4 = createButton("WHAT", 93, 40, "#ff00ff");
+		btn4 = createButton("WHAT", 93, 40, BtnColor[4]);
 		btn4.x = 281.25;
 		btn4.y = 270;
 		stage.addChild(btn4);
 
 		// ボタンを作成
-		btn5 = createButton("WRITE", 282, 40, "#0275d8");
+		btn5 = createButton("WRITE", 282, 40, BtnColor[5]);
 		btn5.x = 0;
 		btn5.y = 0;
 		stage.addChild(btn5);
 
 		// ボタンを作成
-		btn6 = createButton("CLEAR", 91, 40, "#808080");
+		btn6 = createButton("CLEAR", 91, 40, BtnColor[6]);
 		btn6.x = 283;
 		btn6.y = 0;
 		stage.addChild(btn6);
@@ -312,7 +314,7 @@
 			// クリックされた時の処理を記述
 			DySwBtn(1);
 			DyObjClear5W();
-			DyDrawRect();
+			DyDrawRect(1);
 			for (var i=0; i<DyShpWhen.length; i++) {
 				stage.addChild(DyShpWhen[i]);
 			}
@@ -323,7 +325,7 @@
 			// クリックされた時の処理を記述
 			DySwBtn(2);
 			DyObjClear5W();
-			DyDrawRect();
+			DyDrawRect(2);
 			for (var i=0; i<DyShpWhere.length; i++) {
 				stage.addChild(DyShpWhere[i]);
 			}
@@ -334,7 +336,7 @@
 			// クリックされた時の処理を記述
 			DySwBtn(3);
 			DyObjClear5W();
-			DyDrawRect();
+			DyDrawRect(3);
 			for (var i=0; i<DyShpWho.length; i++) {
 				stage.addChild(DyShpWho[i]);
 			}
@@ -345,7 +347,7 @@
 			// クリックされた時の処理を記述
 			DySwBtn(4);
 			DyObjClear5W();
-			DyDrawRect();
+			DyDrawRect(4);
 			for (var i=0; i<DyShpWhat.length; i++) {
 				stage.addChild(DyShpWhat[i]);
 			}
@@ -356,7 +358,7 @@
 			// クリックされた時の処理を記述
 			DySwBtn(5);
 			DyObjClear5W();
-			DyDrawRect();
+			DyDrawRect(5);
 			DyWrite();
 		}
 
@@ -367,7 +369,7 @@
 			DyShapeRst();
 			DyObjClearAll();
 			DyObjClear5W();
-			DyDrawRect();
+			DyDrawRect(0);
 		}
 
 	}
@@ -423,37 +425,37 @@
 		if (1 != BtnNo) {
 			btn1.getChildAt(0).visible = true;
 			btn1.getChildAt(1).visible = false;
-			btn1.getChildAt(2).color = "#0275d8";
+			btn1.getChildAt(2).color = BtnColor[1];
 		}
 
 		if (2 != BtnNo) {
 			btn2.getChildAt(0).visible = true;
 			btn2.getChildAt(1).visible = false;
-			btn2.getChildAt(2).color = "#d9534f";
+			btn2.getChildAt(2).color = BtnColor[2];
 		}
 
 		if (3 != BtnNo) {
 			btn3.getChildAt(0).visible = true;
 			btn3.getChildAt(1).visible = false;
-			btn3.getChildAt(2).color = "#5cb85c";
+			btn3.getChildAt(2).color = BtnColor[3];
 		}
 
 		if (4 != BtnNo) {
 			btn4.getChildAt(0).visible = true;
 			btn4.getChildAt(1).visible = false;
-			btn4.getChildAt(2).color = "#ff00ff";
+			btn4.getChildAt(2).color = BtnColor[4];
 		}
 
 		if (5 != BtnNo) {
 			btn5.getChildAt(0).visible = true;
 			btn5.getChildAt(1).visible = false;
-			btn5.getChildAt(2).color = "#0275d8";
+			btn5.getChildAt(2).color = BtnColor[5];
 		}
 
 		if (6 != BtnNo) {
 			btn6.getChildAt(0).visible = true;
 			btn6.getChildAt(1).visible = false;
-			btn6.getChildAt(2).color = "#808080";
+			btn6.getChildAt(2).color = BtnColor[6];
 		}
 	}
 
@@ -521,19 +523,30 @@
 	  return button;
 	}
 
-function DyDrawRect() {
+function DyDrawRect(BtnNo) {
+
+//	var BtnColor = ["#000000","#0275d8","#d9534f","#5cb85c","#ff00ff","#0275d8","#808080"];
+
+
 	//Graphicsオブジェクトを作成する
 	var g = new createjs.Graphics();
+
 	//線の色を指定
-	g.beginStroke("#00ffff");
+//	g.beginStroke("#00ffff");
+	g.beginStroke(BtnColor[BtnNo]);
+
 	//塗りつぶしの色を作成
 	//g.beginFill("#ffffff");
+
 	// 線の幅を指定
 	g.setStrokeStyle(5);
+
 	//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
 	g.drawRoundRect(2,313,372,238,15);
+
 	//Displayオブジェクトを作成
 	var shape=new createjs.Shape(g);
+
 	//シェイプオブジェクトをステージに追加する
 	stage.addChild(shape);
 }
