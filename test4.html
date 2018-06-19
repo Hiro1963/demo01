@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0120</title>
+	<title>Touch Enikki Ver.0121</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -376,14 +376,18 @@
 		//日記を書く
 		var words = [];
 
-		for(var i=0;i<DyShpDraw.length; ++i){
+		if (DyShpDraw.length == 0) {
+			return;
+		}
+
+		for(var i=0;i<DyShpDraw.length; ++i) {
 			words[i] = DyShpDraw[i].name.split(',');
 		}
 
 		text1.text = "I";
 		text1.x = 10;
 		text1.y = 325;
-		var index = 1;
+
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHAT' == words[i][0] ) {
 				text1.text += " ";
@@ -527,7 +531,7 @@ function DyDrawRect() {
 	// 線の幅を指定
 	g.setStrokeStyle(5);
 	//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
-	g.drawRoundRect(2,313,372,238,30);
+	g.drawRoundRect(2,313,372,238,15);
 	//Displayオブジェクトを作成
 	var shape=new createjs.Shape(g);
 	//シェイプオブジェクトをステージに追加する
