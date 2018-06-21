@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0125</title>
+	<title>Touch Enikki Ver.0123</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -15,29 +15,25 @@
 	var DyShpWho = [];
 	var DyShpWhat = [];
 	var DyShpDraw = [];
-	var DyShpRectWord = [];
 	var DyArrShp5wPos = [];
 	var DyMvShape
 	var MoveStarted = false;
 	var text1
 	var btn1,btn2,btn3,btn4,btn5
 	var BtnColor = ["#ffffff","#0275d8","#d9534f","#5cb85c","#ff00ff","#0275d8","#808080"];
-	var DyRectShape
+	var DyGraphics
 
 	window.addEventListener("load", main);
 
 	function main() {
-
 		// 読み込みが終わってから初期化
 		init();
 		DyWord();
 		DyButton();
 		DyShapeDef();
-		DyCreateRect();
 	}
 
 	function init() {
-
 		// ステージを作成
 		stage = new createjs.Stage("myCanvas");
 
@@ -56,10 +52,11 @@
 		DyArrShp5wPos.push(new DyShp5wPos(15, 325));
 		DyArrShp5wPos.push(new DyShp5wPos(100, 325));
 
+		DyGraphics = new createjs.Graphics();
+
 	}
 
 	function DyWord() {
-
 		// tick イベントを登録する
 		createjs.Ticker.addEventListener("tick", handleTick);
 
@@ -78,7 +75,6 @@
 	}
 
 	function DyShp5wPos(x, y) {
-
 		this.x = x;
 		this.y = y;
 	}
@@ -112,9 +108,8 @@
 	}
 
 	function DyBmpAdd(BmpType, BmpName, BmpWord) {
-
 		// オブジェクト(WHEN)の作成
-		var Dyshape = new createjs.Bitmap(BmpName);
+		Dyshape = new createjs.Bitmap(BmpName);
 		Dyshape.name = BmpWord;
 		
 		switch( BmpType ) {
@@ -213,7 +208,6 @@
     }
 
 	function DyObjClearAll() {
-
 		DyShpDraw.length = 0;
 	}
 
@@ -383,7 +377,6 @@
 	}
 
 	function DyWrite() {
-
 		//日記を書く
 		var words = [];
 
@@ -431,7 +424,6 @@
 
 
 	function DySwBtn(BtnNo) {
-
 		if (1 != BtnNo) {
 			btn1.getChildAt(0).visible = true;
 			btn1.getChildAt(1).visible = false;
@@ -535,38 +527,32 @@
 
 function DyDrawRect(BtnNo) {
 
-	// 選択肢の枠を切り替える
-	for (var i=0; i < DyShpRectWord.length; i++) {
-		stage.removeChild(DyShpRectWord[i]);
-	}
+//	var BtnColor = ["#000000","#0275d8","#d9534f","#5cb85c","#ff00ff","#0275d8","#808080"];
 
-	for (var i=0; i < DyShpRectWord.length; i++) {
-		if (i == BtnNo-1) {
-			stage.addChild(DyShpRectWord[i]);
-		}
-		else {
-			stage.removeChild(DyShpRectWord[i]);
-		}
-	}
-}
 
-function DyCreateRect() {
+	//Graphicsオブジェクトを作成する
+//	var DyGraphics = new createjs.Graphics();
 
-	for (var i=1; i<=6; i++) {
-		//Graphicsオブジェクトを作成する
-		var g = new createjs.Graphics();
-		//線の色を指定
-		g.beginStroke(BtnColor[i]);
-		//塗りつぶしの色を作成
-		//g.beginFill("#ffffff");
-		// 線の幅を指定
-		g.setStrokeStyle(5);
-		//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
-//		g.drawRoundRect(2,313,372,238,30);
-		g.drawRoundRect(2,312,372,238,30);
-		//Displayオブジェクトを作成
-		DyShpRectWord.push(new createjs.Shape(g));
-	}
+	//線の色を指定
+//	DyGraphics.beginStroke("#00ffff");
+	DyGraphics.beginStroke(BtnColor[BtnNo]);
+
+	//塗りつぶしの色を作成
+	//DyGraphics.beginFill("#ffffff");
+
+	// 線の幅を指定
+	DyGraphics.setStrokeStyle(5);
+
+	//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
+	DyGraphics.drawRoundRect(2,313,372,238,15);
+
+	//Displayオブジェクトを作成
+	var shape=new createjs.Shape(DyGraphics);
+
+	//シェイプオブジェクトをステージに追加する
+	stage.addChild(shape);
+	
+	DyGraphics.beginStroke("#00ffff");
 }
 
 </script>

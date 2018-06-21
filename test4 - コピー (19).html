@@ -27,17 +27,14 @@
 	window.addEventListener("load", main);
 
 	function main() {
-
 		// 読み込みが終わってから初期化
 		init();
 		DyWord();
 		DyButton();
 		DyShapeDef();
-		DyCreateRect();
 	}
 
 	function init() {
-
 		// ステージを作成
 		stage = new createjs.Stage("myCanvas");
 
@@ -56,10 +53,14 @@
 		DyArrShp5wPos.push(new DyShp5wPos(15, 325));
 		DyArrShp5wPos.push(new DyShp5wPos(100, 325));
 
+		// 四角形を作成
+		for (var i=1; i<=6; i++) {
+			DyCreateRect(i);
+		}
+
 	}
 
 	function DyWord() {
-
 		// tick イベントを登録する
 		createjs.Ticker.addEventListener("tick", handleTick);
 
@@ -78,7 +79,6 @@
 	}
 
 	function DyShp5wPos(x, y) {
-
 		this.x = x;
 		this.y = y;
 	}
@@ -112,7 +112,6 @@
 	}
 
 	function DyBmpAdd(BmpType, BmpName, BmpWord) {
-
 		// オブジェクト(WHEN)の作成
 		var Dyshape = new createjs.Bitmap(BmpName);
 		Dyshape.name = BmpWord;
@@ -213,7 +212,6 @@
     }
 
 	function DyObjClearAll() {
-
 		DyShpDraw.length = 0;
 	}
 
@@ -383,7 +381,6 @@
 	}
 
 	function DyWrite() {
-
 		//日記を書く
 		var words = [];
 
@@ -431,7 +428,6 @@
 
 
 	function DySwBtn(BtnNo) {
-
 		if (1 != BtnNo) {
 			btn1.getChildAt(0).visible = true;
 			btn1.getChildAt(1).visible = false;
@@ -550,24 +546,84 @@ function DyDrawRect(BtnNo) {
 	}
 }
 
-function DyCreateRect() {
+function DyCreateRect(BtnNo) {
+	//Graphicsオブジェクトを作成する
+	var g = new createjs.Graphics();
+	//線の色を指定
+//	g.beginStroke("#00ffff");
+	g.beginStroke(BtnColor[BtnNo]);
+	//塗りつぶしの色を作成
+	//g.beginFill("#ffffff");
+	// 線の幅を指定
+	g.setStrokeStyle(5);
+	//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
+	g.drawRoundRect(2,313,372,238,30);
+//	g.rect(2,313,372,238,30);
+	//Displayオブジェクトを作成
+//	Shape=new createjs.Shape(g);
+	DyShpRectWord.push(new createjs.Shape(g));
+	//シェイプオブジェクトをステージに追加する
+//	stage.addChild(DyRectShape);
 
-	for (var i=1; i<=6; i++) {
-		//Graphicsオブジェクトを作成する
-		var g = new createjs.Graphics();
-		//線の色を指定
-		g.beginStroke(BtnColor[i]);
-		//塗りつぶしの色を作成
-		//g.beginFill("#ffffff");
-		// 線の幅を指定
-		g.setStrokeStyle(5);
-		//四角を描く(x:0,y:0を左上角とした幅100px,高さ100pxの四角)
-//		g.drawRoundRect(2,313,372,238,30);
-		g.drawRoundRect(2,312,372,238,30);
-		//Displayオブジェクトを作成
-		DyShpRectWord.push(new createjs.Shape(g));
-	}
+//	DyRectShape.graphics.beginStroke(BtnColor[4]);
+//	g.beginStroke(BtnColor[4]);
 }
+
+	function DyCreateRect3() {
+		// Stageオブジェクトを作成。表示リストのルートになります。
+//		var stage = new createjs.Stage("myCanvas");
+		// シェイプを作成
+		var shape = new createjs.Shape();
+		// 塗りの色を指定
+		shape.graphics.beginFill("DarkRed");
+		// 円を描く
+		shape.graphics.drawCircle(0, 0, 80);
+		stage.addChild(shape); // 表示リストに追加
+		// 配置座標を設定
+		shape.x = 200;
+		shape.y = 100;
+		// Stageの描画を更新
+		stage.update();
+	}
+
+	function DyCreateRect4() {
+		// Stageオブジェクトを作成。表示リストのルートになります。
+//		var stage = new createjs.Stage("myCanvas");
+		// シェイプを作成
+		var shape = new createjs.Shape();
+		// 塗りの色を指定
+		shape.graphics.beginFill("DarkRed");
+		// 円を描く
+//		shape.graphics.drawCircle(0, 0, 80);
+		shape.graphics.rect(2,313,372,238,30);
+		stage.addChild(shape); // 表示リストに追加
+		// 配置座標を設定
+		shape.x = 200;
+		shape.y = 100;
+		// Stageの描画を更新
+		stage.update();
+	}
+
+	function DyCreateRect100(i) {
+		// Stageオブジェクトを作成。表示リストのルートになります。
+//		var stage = new createjs.Stage("myCanvas");
+		// シェイプを作成
+		var shape = new createjs.Shape();
+		// 塗りの色を指定
+		shape.graphics.beginFill(BtnColor[i]);
+		// 円を描く
+//		shape.graphics.drawCircle(0, 0, 80);
+		shape.graphics.rect(2,313,372,238,30);
+//		stage.addChild(shape); // 表示リストに追加
+		// 配置座標を設定
+//		shape.x = 200;
+		shape.x = 0;
+		shape.y = 100;
+		DyShpRectWord = shape;
+		// Stageの描画を更新
+		stage.update();
+	}
+
 
 </script>
 </head>
