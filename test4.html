@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0129</title>
+	<title>Touch Enikki Ver.0130</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -17,6 +17,7 @@
 	var DyShpDraw = [];
 	var DyShpRectWord = [];
 	var DyArrShp5wPos = [];
+	var DyBackGround = [];
 	var DyMvShape
 	var MoveStarted = false;
 	var text1
@@ -134,11 +135,13 @@
 	}
 
 	function DyShapeDef() {
+		// オブジェクト(WHEN)の作成
+		DyBackGround.push(new createjs.Bitmap("sea1.png"));
 
 		DyBmpAdd("TYPE_WHEN", "when1.png", "TYPE_WHEN,in the morning");
 		DyBmpAdd("TYPE_WHEN", "when2.png", "TYPE_WHEN,in the afternoon");
 
-		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,in the sea");
+		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,in the sea,sea1.png");
 		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,in the mountains");
 
 		DyBmpAdd("TYPE_WHO", "who1.png", "TYPE_WHO,with my friend");
@@ -197,7 +200,13 @@
 						}
 					}
 					if (i == DyShpDraw.length) {
+						var words = DyMvShape.name.split(',');
 						DyShpDraw.push(DyMvShape);
+						if('TYPE_WHERE' == words[0]) {
+							stage.addChildAt(DyBackGround[0],0);
+							DyBackGround[0].x = 0;
+							DyBackGround[0].y = 40;
+						}
 					}
 				}
 				else {
@@ -382,7 +391,6 @@
 
 	}
 
-
 	var DayNames = [
 		'Sun',
 		'Mon',
@@ -459,7 +467,7 @@
 			}
 		}
 		var len = text1.text.length;
-		text1.text += "\r";
+		text1.text += ".\n";
 		stage.addChild(text1);
 	}
 
