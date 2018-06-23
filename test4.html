@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0130</title>
+	<title>Touch Enikki Ver.0131</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -24,6 +24,7 @@
 	var btn1,btn2,btn3,btn4,btn5
 	var BtnColor = ["#ffffff","#0275d8","#d9534f","#5cb85c","#ff00ff","#0275d8","#808080"];
 	var DyRectShape
+	var DyBg_no
 
 	window.addEventListener("load", main);
 
@@ -137,12 +138,13 @@
 	function DyShapeDef() {
 		// オブジェクト(WHEN)の作成
 		DyBackGround.push(new createjs.Bitmap("sea1.png"));
+		DyBackGround.push(new createjs.Bitmap("park1.png"));
 
 		DyBmpAdd("TYPE_WHEN", "when1.png", "TYPE_WHEN,in the morning");
 		DyBmpAdd("TYPE_WHEN", "when2.png", "TYPE_WHEN,in the afternoon");
 
-		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,in the sea,sea1.png");
-		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,in the mountains");
+		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,in the sea,0");
+		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,at the park,1");
 
 		DyBmpAdd("TYPE_WHO", "who1.png", "TYPE_WHO,with my friend");
 		DyBmpAdd("TYPE_WHO", "who2.png", "TYPE_WHO,with my family");
@@ -203,9 +205,10 @@
 						var words = DyMvShape.name.split(',');
 						DyShpDraw.push(DyMvShape);
 						if('TYPE_WHERE' == words[0]) {
-							stage.addChildAt(DyBackGround[0],0);
+							stage.addChildAt(DyBackGround[Number(words[2])],0);
 							DyBackGround[0].x = 0;
 							DyBackGround[0].y = 40;
+							DyBg_no = words[2];
 						}
 					}
 				}
@@ -216,6 +219,8 @@
 							break;
 						}
 					}
+					stage.removeChild(DyBackGround[DyBg_no]);
+
 				}
 			}
 		}
@@ -229,6 +234,7 @@
 	function DyObjClear5W() {
 
 		stage.removeChild(text1);
+		stage.removeChild(DyBackGround[DyBg_no]);
 
 		//WHEN
 		for (var i=0; i<DyShpWhen.length; i++) {
