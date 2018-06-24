@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0131</title>
+	<title>Touch Enikki Ver.0132</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -219,7 +219,10 @@
 							break;
 						}
 					}
-					stage.removeChild(DyBackGround[DyBg_no]);
+					var words = DyMvShape.name.split(',');
+					if('TYPE_WHERE' == words[0]) {
+						stage.removeChild(DyBackGround[DyBg_no]);
+					}
 
 				}
 			}
@@ -234,7 +237,7 @@
 	function DyObjClear5W() {
 
 		stage.removeChild(text1);
-		stage.removeChild(DyBackGround[DyBg_no]);
+//		stage.removeChild(DyBackGround[DyBg_no]);
 
 		//WHEN
 		for (var i=0; i<DyShpWhen.length; i++) {
@@ -393,6 +396,8 @@
 			DyObjClearAll();
 			DyObjClear5W();
 			DyDrawRect(0);
+			stage.removeChild(DyBackGround[DyBg_no]);
+
 		}
 
 	}
