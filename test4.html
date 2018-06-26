@@ -431,7 +431,12 @@
 		'Nov',
 		'Dec',
 	];
-	
+
+	function strIns(str, idx, val){
+		  var res = str.slice(0, idx) + val + str.slice(idx);
+		  return res;
+	}
+
 	function DyWrite() {
 
 		//日記を書く
@@ -447,43 +452,57 @@
 		}
 
 		var now = new Date();
-		text1.text =  MonthNames[now.getMonth()] + ' ';
-		text1.text += String(now.getDate()) + ',';
-		text1.text += ' ' + String(now.getFullYear());
-		text1.text += '(' + DayNames[now.getDay()] + '.)';
-		text1.text += '\n\n';
+		var strText1;
+		strText1 =  MonthNames[now.getMonth()] + ' ';
+		strText1 += String(now.getDate()) + ',';
+		strText1 += ' ' + String(now.getFullYear());
+		strText1 += '(' + DayNames[now.getDay()] + '.)';
+		strText1 += '\n\n';
+		
+		var wLen1 = strText1.length;
 
-		text1.text += "I";
-		text1.x = 10;
-		text1.y = 325;
+		var strText2 = "I";
 
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHAT' == words[i][0] ) {
-				text1.text += " ";
-				text1.text += words[i][1];
+				strText2 += " ";
+				strText2 += words[i][1];
 			}
 		}
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
-				text1.text += " ";
-				text1.text += words[i][1];
+				strText2 += " ";
+				strText2 += words[i][1];
 			}
 		}
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHERE' == words[i][0] ) {
-				text1.text += "\r";
-				text1.text += " ";
-				text1.text += words[i][1];
+				strText2 += "\r";
+				strText2 += " ";
+				strText2 += words[i][1];
 			}
 		}
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHEN' == words[i][0] ) {
-				text1.text += " ";
-				text1.text += words[i][1];
+				strText2 += " ";
+				strText2 += words[i][1];
 			}
 		}
-		var len = text1.text.length;
-		text1.text += ".\n";
+
+		var wBus;
+		var wLen2 = strText2.length - wLen1;
+		wBus = Math.floor(wLen2 / 35);
+
+		var wStr = strText2;
+		var res = wStr.slice(2);
+		for (var i=0; i<wBus; i++) {
+			wStr = strIns(wStr, (i+1)*35, '-\n');
+		}
+		strText2 = wStr;
+
+		text1.text = strText1 + strText2 + ".\n";
+		text1.x = 10;
+		text1.y = 325;
 		stage.addChild(text1);
 	}
 
