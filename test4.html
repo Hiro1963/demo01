@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0136</title>
+	<title>Touch Enikki Ver.0137</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -147,9 +147,9 @@
 		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,at the sea,0");
 		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,in the park,1");
 
-		DyBmpAdd("TYPE_WHO", "who0.png", "TYPE_WHO,");
-		DyBmpAdd("TYPE_WHO", "who1.png", "TYPE_WHO,with my friend");
-		DyBmpAdd("TYPE_WHO", "who2.png", "TYPE_WHO,with my girl friend");
+		DyBmpAdd("TYPE_WHO", "who0.png", "TYPE_WHO,,0");
+		DyBmpAdd("TYPE_WHO", "who1.png", "TYPE_WHO,with my friend,1");
+		DyBmpAdd("TYPE_WHO", "who2.png", "TYPE_WHO,with my friend,2");
 
 		DyBmpAdd("TYPE_WHAT", "what1.png", "TYPE_WHAT,enjoyed the beach ball");
 		DyBmpAdd("TYPE_WHAT", "what2.png", "TYPE_WHAT,enjoyed the swing");
@@ -472,12 +472,25 @@
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
 				strText2 += " ";
-				strText2 += words[i][1];
+				
+				//フレンドのときは一人でも二人でもフレンドにしたい
+				var j
+				for (j=0; j<i; j++) {
+				
+					if (words[i][1] == words[j][1]) {
+				//		if (words[i][2] == words[j][2]) {
+							break;
+				//		}
+					}
+				}
+				
+				if (j == i ) {
+					strText2 += words[i][1];
+				}
 			}
 		}
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHERE' == words[i][0] ) {
-				strText2 += "\r";
 				strText2 += " ";
 				strText2 += words[i][1];
 			}
