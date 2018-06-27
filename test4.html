@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0139</title>
+	<title>Touch Enikki Ver.0140</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -187,7 +187,22 @@
 			// 押した時の処理を記述
 		    if (false == MoveStarted) {
 				DyMvShape = event.target;
-				MoveStarted = true;
+				
+				// 選択肢はあれは動ない
+				if ((DyMvShape.y < 270)||('TYPE_WHO' == DyMvShape.name.split(',')[0])) {
+						MoveStarted = true;
+				}
+				else {
+					var i;
+					for (i=0; i<DyShpDraw.length; i++) {
+						if (DyShpDraw[i].name.split(',')[0] == DyMvShape.name.split(',')[0]) {
+							break;
+						}
+					}
+					if (i == DyShpDraw.length) {
+						MoveStarted = true;
+					}
+				}
 			}
 		}
 
@@ -471,12 +486,13 @@
 		}
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
-				strText2 += " ";
-				
+				if (0 != words[i][2]) {
+					strText2 += " ";
+				}
+
 				//フレンドのときは一人でも二人でもフレンドにしたい
 				var j
 				for (j=0; j<i; j++) {
-				
 					if (words[i][1] == words[j][1]) {
 						break;
 					}
