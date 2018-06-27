@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0138</title>
+	<title>Touch Enikki Ver.0139</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -501,14 +501,20 @@
 		}
 
 		var wBus;
-//		var wLen2 = strText2.length - wLen1;
 		var wLen2 = strText2.length;
 		wBus = Math.floor(wLen2 / 35);
 
 		var wStr = strText2;
-		var res = wStr.slice(2);
 		for (var i=0; i<wBus; i++) {
-			wStr = strIns(wStr, (i+1)*35, '-\n');
+			var idx = (i+1)*35+1;
+//			var res1 = wStr.slice(idx-1,idx);
+//			var res2 = wStr.slice(30,40);
+			if (wStr.slice(idx-1,idx) == " ") {
+				wStr = strIns(wStr, (i+1)*35, '\n');
+			}
+			else {
+				wStr = strIns(wStr, (i+1)*35, '-\n');
+			}
 		}
 		strText2 = wStr;
 
