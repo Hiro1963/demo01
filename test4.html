@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0142</title>
+	<title>Touch Enikki Ver.0143</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -466,13 +466,56 @@
 			return;
 		}
 
+//		//絵日記を読み取る
+//		for(var i=0;i<DyShpDraw.length; ++i) {
+//			words[i] = DyShpDraw[i].name.split(',');
+//		}
+
 		//絵日記を読み取る
+		var fgWhat = 0;
+		var fgWho = 0;
+		var fgWhen = 0;
+		var fgWhere = 0;
 		for(var i=0;i<DyShpDraw.length; ++i) {
 			words[i] = DyShpDraw[i].name.split(',');
+			if( 'TYPE_WHAT' == words[i][0] ) {
+				var fgWhat = 1;
+			}
+			if( 'TYPE_WHO' == words[i][0] ) {
+				var fgWho = 1;
+			}
+			if( 'TYPE_WHEN' == words[i][0] ) {
+				var fgWhen = 1;
+			}
+			if( 'TYPE_WHERE' == words[i][0] ) {
+				var fgWhere = 1;
+			}
+		}
+
+		text1.x = 10;
+		text1.y = 325;
+		if (0 == fgWhat) {
+			text1.text = "Please select item [WHAT].\n"
+			stage.addChild(text1);
+			return;
+		}
+		if (0 == fgWho) {
+			text1.text = "Please select item [WHO].\n"
+			stage.addChild(text1);
+			return;
+		}
+		if (0 == fgWhen) {
+			text1.text = "Please select item [WHEN].\n"
+			stage.addChild(text1);
+			return;
+		}
+		if (0 == fgWhere) {
+			text1.text = "Please select item [WHERE].\n"
+			stage.addChild(text1);
+			return;
 		}
 
 		var now = new Date();
-		var strText1;
 		strText1 =  MonthNames[now.getMonth()] + ' ';
 		strText1 += String(now.getDate()) + ',';
 		strText1 += ' ' + String(now.getFullYear());
