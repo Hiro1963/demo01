@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0144</title>
+	<title>Touch Enikki Ver.0145</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -25,6 +25,45 @@
 	var BtnColor = ["#ffffff","#0275d8","#d9534f","#5cb85c","#ff00ff","#0275d8","#808080"];
 	var DyRectShape
 	var DyBg_no
+	var DyCurTypeNames
+
+	var TypeNames = [
+		'TYPE_DUMMY',
+		'TYPE_WHERE',
+		'TYPE_WHEN',
+		'TYPE_WHO',
+		'TYPE_WHAT',
+		'TYPE_WRITE',
+		'TYPE_CLEAR'
+	];
+
+	var DayNames = [
+		'Sun',
+		'Mon',
+		'Tue',
+		'Wed',
+		'Thu',
+		'Fri',
+		'Sat'
+	];
+
+	var MonthNames = [
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec',
+	];
+
+
+
 
 	window.addEventListener("load", main);
 
@@ -68,15 +107,14 @@
 
 		function handleTick(event) {
 			if (true == MoveStarted) {
-			// シェイプをマウスに追随させる
-			if (stage.mouseY > 50) {
-				DyMvShape.x = stage.mouseX;
-				DyMvShape.y = stage.mouseY;
+				// シェイプをマウスに追随させる
+				if (stage.mouseY > 50) {
+					DyMvShape.x = stage.mouseX;
+					DyMvShape.y = stage.mouseY;
+				}
 			}
-		}
-
-		// 画面を更新する
-		stage.update();
+			// 画面を更新する
+			stage.update();
 		}
 	}
 
@@ -188,11 +226,11 @@
 		    if (false == MoveStarted) {
 				DyMvShape = event.target;
 				
-				// 選択肢はあれは動ない
 				if ((DyMvShape.y < 270)||('TYPE_WHO' == DyMvShape.name.split(',')[0])) {
 						MoveStarted = true;
 				}
 				else {
+					// 選択肢が絵にあれば動ない
 					var i;
 					for (i=0; i<DyShpDraw.length; i++) {
 						if (DyShpDraw[i].name.split(',')[0] == DyMvShape.name.split(',')[0]) {
@@ -358,6 +396,7 @@
 		//WHERE
 		function handleClick1(event) {
 			// クリックされた時の処理を記述
+			DyCurTypeNames = TypeNames[1];
 			DySwBtn(1);
 			DyObjClear5W();
 			DyDrawRect(1);
@@ -369,6 +408,7 @@
 		//WHEN
 		function handleClick2(event) {
 			// クリックされた時の処理を記述
+			DyCurTypeNames = TypeNames[2];
 			DySwBtn(2);
 			DyObjClear5W();
 			DyDrawRect(2);
@@ -380,6 +420,7 @@
 		//WHO
 		function handleClick3(event) {
 			// クリックされた時の処理を記述
+			DyCurTypeNames = TypeNames[3];
 			DySwBtn(3);
 			DyObjClear5W();
 			DyDrawRect(3);
@@ -391,6 +432,7 @@
 		//WHAT
 		function handleClick4(event) {
 			// クリックされた時の処理を記述
+			DyCurTypeNames = TypeNames[4];
 			DySwBtn(4);
 			DyObjClear5W();
 			DyDrawRect(4);
@@ -402,6 +444,7 @@
 		//WRITE
 		function handleClick5(event) {
 			// クリックされた時の処理を記述
+			DyCurTypeNames = TypeNames[5];
 			DySwBtn(5);
 			DyObjClear5W();
 			DyDrawRect(5);
@@ -411,11 +454,13 @@
 		//CLEAR
 		function handleClick6(event) {
 			// クリックされた時の処理を記述
+			DyCurTypeNames = TypeNames[6];
 			window.location.reload();
 		}
 
 //		function handleClick7(event) {
 //			// クリックされた時の処理を記述
+//			DyCurTypeNames = TypeNames[5];
 //			DySwBtn(6);
 //			DyShapeRst();
 //			DyObjClearAll();
@@ -426,31 +471,6 @@
 //		}
 
 	}
-
-	var DayNames = [
-		'Sun',
-		'Mon',
-		'Tue',
-		'Wed',
-		'Thu',
-		'Fri',
-		'Sat'
-	];
-
-	var MonthNames = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec',
-	];
 
 	function strIns(str, idx, val){
 		  var res = str.slice(0, idx) + val + str.slice(idx);
