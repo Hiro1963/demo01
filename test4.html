@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0148</title>
+	<title>Touch Enikki Ver.0149</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -75,7 +75,6 @@
 		DyButton();
 		DyShapeDef();
 		DyCreateRect();
-		expandCanvas();
 	}
 
 	function init() {
@@ -783,14 +782,7 @@ function DyCreateRect() {
 	}
 }
 
-var Tcanvas = document.getElementById('myCanvas');
 
-function expandCanvas(){
-    var b = document.body;
-    var d = document.documentElement;
-    Tcanvas.width = Math.max(b.clientWidth , b.scrollWidth, d.scrollWidth, d.clientWidth);
-    Tcanvas.height = Math.max(b.clientHeight , b.scrollHeight, d.scrollHeight, d.clientHeight);
-}
 
 </script>
 </head>
