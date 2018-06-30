@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0149</title>
+	<title>Touch Enikki Ver.0150</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -75,6 +75,12 @@
 		DyButton();
 		DyShapeDef();
 		DyCreateRect();
+		
+		// 最下位に起動画面作成
+		stage.addChildAt(DyBackGround[0],0);
+		DyBackGround[0].x = 0;
+		DyBackGround[0].y = 40;
+
 	}
 
 	function init() {
@@ -100,33 +106,16 @@
 
 	}
 
-	function ____DyWord() {
-
-		// tick イベントを登録する
-		createjs.Ticker.addEventListener("tick", handleTick);
-
-		function handleTick(event) {
-			if (true == MoveStarted) {
-				// シェイプをマウスに追随させる
-				if (stage.mouseY > 50) {
-					DyMvShape.x = stage.mouseX;
-					DyMvShape.y = stage.mouseY;
-				}
-			}
-			// 画面を更新する
-			stage.update();
-		}
-	}
-
 	function DyWord() {
 
 		// tick イベントを登録する
 		createjs.Ticker.addEventListener("tick", handleTick);
 
 		function handleTick(event) {
-		
+
 			while (true) {
 				if (true == MoveStarted) {
+
 					// シェイプをマウスに追随させる
 					if (stage.mouseY < 50) {
 						break;
@@ -205,14 +194,15 @@
 
 	function DyShapeDef() {
 		// オブジェクト(WHEN)の作成
+		DyBackGround.push(new createjs.Bitmap("boot1.png"));
 		DyBackGround.push(new createjs.Bitmap("sea1.png"));
 		DyBackGround.push(new createjs.Bitmap("park1.png"));
 
 		DyBmpAdd("TYPE_WHEN", "when1.png", "TYPE_WHEN,in the morning");
 		DyBmpAdd("TYPE_WHEN", "when2.png", "TYPE_WHEN,in the afternoon");
 
-		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,at the sea,0");
-		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,in the park,1");
+		DyBmpAdd("TYPE_WHERE", "where1.png", "TYPE_WHERE,at the sea,1");
+		DyBmpAdd("TYPE_WHERE", "where2.png", "TYPE_WHERE,in the park,2");
 
 		DyBmpAdd("TYPE_WHO", "who0.png", "TYPE_WHO,,0");
 		DyBmpAdd("TYPE_WHO", "who1.png", "TYPE_WHO,with my friend,1");
@@ -643,6 +633,9 @@
 
 
 	function DySwBtn(BtnNo) {
+
+		//起動画面を消す
+		stage.removeChild(DyBackGround[0]);
 
 		if (1 != BtnNo) {
 			btn1.getChildAt(0).visible = true;
