@@ -1,0 +1,276 @@
+@charset "UTF-8";
+
+/*------------------------------------------------------------
+	デフォルトスタイル
+------------------------------------------------------------*/
+html, body, div, span, figure, img, fieldset,
+a, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, small, strong, dl, dt, dd, ol, ul, li,
+table, caption, tbody, tfoot, thead, tr, th, td{
+	margin:0;
+	padding:0;
+	border:none;
+	outline:none;
+	font-size:1em;
+}
+
+header,hgroup,nav,article,
+section,aside,figure,footer{
+	display:block;
+}
+
+ol, ul{
+	list-style: none;  
+}
+
+html{
+    font:14px/1.3 "メイリオ", Meiryo, Osaka, "ヒラギノ角ゴ Pro W3", "ＭＳ ゴシック", Arial, Helvetica, Tahoma, sans-serif;
+}
+
+
+
+/*------------------------------------------------------------
+	レイアウト
+------------------------------------------------------------*/
+body{
+	background:#1C140D;
+	width:100%;
+	color:#F2E9E1;
+}
+
+/*	リンクタグ	*/
+
+a,
+a:hover{
+	color:#8DB42D;
+	text-decoration:none;
+}
+
+
+
+/*------------------------------------------------------------
+	ヘッダー
+------------------------------------------------------------*/
+header{
+	width:100%;
+	overflow:hidden;}
+
+
+/*	タイトル	*/
+#top h1{
+	background:url(img/header_bg.gif) repeat-x;
+	ackground-image:-moz-linear-gradient(top, #FFF, #D9D9D9);
+	background-image:-webkit-gradient(linear, center top, center bottom, from(#FFF), to(#D9D9D9));
+	background-image:-o-linear-gradient(top, #FFF, #D9D9D9);
+	background-image:linear-gradient(top, #FFF, #D9D9D9);
+	width:100%;
+	padding:3% 10px;
+	border-bottom:solid 1px #F2E9E1;
+	color:#1C140D;
+	text-shadow:1px 1px 1px #FFF;
+}
+
+/*---------------------
+	ヘッダー画像
+--------------------*/
+p#h_image{
+	padding:0;
+	position:relative;
+}
+
+p#h_image img{
+	width:99.5%;
+	margin:auto;
+	border:solid 1px #030201;}
+
+/*	ヘッダー画像内 文字	*/
+p#h_image span{
+	padding:0 10px;
+	display:block;
+	color:#FFF;
+	position:absolute;
+	z-index:2;
+	top:40%;
+}
+
+/*	ヘッダー画像下 文字	*/
+header h2{
+	padding:10px;
+}
+
+header p.des{
+	padding:0 10px;
+	margin-bottom:5%;
+}
+
+
+
+/*------------------------------------------------------------
+	カテゴリ
+------------------------------------------------------------*/
+article{
+	width:100%;
+	overflow:hidden;
+}
+
+/*---------------------
+	カテゴリタイトル
+--------------------*/
+article .title h2{
+	background-image: -moz-linear-gradient(top, #5D5752, #342F29);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#5D5752), to(#342F29));
+	background-image: -o-linear-gradient(top, #5D5752, #342F29);
+	background-image: linear-gradient(top, #5D5752, #342F29);
+	padding:3% 10px;
+	margin:0;
+	color:#FFF;
+	border:solid 1px #161310;
+	border-top:solid 1px #968F89;
+	text-shadow:1px 1px 1px #1C140D;}
+
+/*---------------------
+	カテゴリボディ
+--------------------*/
+article section{
+	padding:4% 5px 4% 10px;
+}
+
+article section:nth-child(even){
+	background-image: -moz-linear-gradient(top, #E6DDD6, #ECE4DC);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#E6DDD6), to(#ECE4DC));
+	background-image: -o-linear-gradient(top, #E6DDD6, #ECE4DC);
+	background-image: linear-gradient(top, #E6DDD6, #ECE4DC);
+	border:solid 1px;
+	border-color:#FFF transparent #DACCBE;
+}
+
+article section:nth-child(odd){
+	background-image: -moz-linear-gradient(top, #E1D9D3, #CEC6BF);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#E1D9D3), to(#CEC6BF));
+	background-image: -o-linear-gradient(top, #E1D9D3, #CEC6BF);
+	background-image: linear-gradient(top, #E1D9D3, #CEC6BF);
+	border:solid 1px;
+	border-color:#FFF transparent #A69A8F;
+}
+
+article section a{
+	background:url(img/link_icon.png) no-repeat right center;
+	padding-right:4%;
+	display:block;
+	overflow:hidden;
+}
+
+/*	カテゴリ画像　*/
+article section a figure{
+	width:35%;
+	margin-right:10px;
+	padding:0;
+	overflow:hidden;
+
+	border:solid 1px #8DB42D;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+
+	float:left;}
+
+article section a figure img{
+	background:#8DB42D;
+	width:100%;
+	margin-bottom:-4.5%;
+
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;}
+
+@media screen and (min-width:480px) {
+	article section a figure{
+		padding-bottom:0.5%;
+	}
+}
+
+/*	カテゴリ画像の説明文字　*/
+article section a h2{
+	width:60.5%;
+	color:#8DB42D;
+	float:right;
+}
+
+article section a p{
+	width:60.5%;
+	color:#1C140D;
+	float:right;
+}
+
+/*	トップに戻る　*/
+p.go_top{
+	text-align:right;}
+
+p.go_top a{
+	margin-right:5px;
+	padding:5% 15px 5% 0;
+	display:block;
+	color:#F2E9E1;
+}
+
+/*------------------------------------------------------------
+	フッター
+------------------------------------------------------------*/
+/*	フリースペース　*/
+.free_space{
+	padding:3% 10px;
+	border:dotted #F2E9E1;
+	border-width:1px 0;
+}
+
+.free_space img{
+	margin:auto;
+	display:block;
+	border:solid 1px #333631;
+}
+
+/*	メニュー　*/
+footer ul{
+	padding:4% 0;
+	overflow:hidden;
+}
+
+footer ul li{
+	width:20%;
+	margin:2% 2.5% 2% 2.5%;
+	float:left;
+}
+
+footer ul li a{
+	padding:1.4em 0;
+	display:block;
+	color:#1C140D;
+	border:solid 1px #FFF;
+
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	text-align:center;
+	-moz-box-shadow:0px 0px 0px 1px #A2968C;
+	-webkit-box-shadow:0px 0px 0px 1px #A2968C;
+	box-shadow:0px 0px 0px 1px #A2968C;
+	background-image: -moz-linear-gradient(top, #F8F4EF, #E6D5C7);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#F8F4EF), to(#E6D5C7));
+	background-image: -o-linear-gradient(top, #F8F4EF, #E6D5C7);
+	background-image: linear-gradient(top, #F8F4EF, #E6D5C7);
+	-moz-background-clip: padding-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
+
+/*	コピーライト　*/
+address{
+	padding:3% 0;
+	border-top:dotted 1px #F2E9E1;
+}
+
+address p{
+	color:#F2E9E1;
+	font-size:0.714em;
+	text-align:center;}
+
