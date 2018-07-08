@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0159</title>
+	<title>Touch Enikki Ver.0158</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -25,6 +25,7 @@
 	var MoveStarted = false;    //ドラッグ中：true、停止中：false
 	var DyBg_no					//背景の番号
 	var DyCurTypeNames			//現在選択されている種別
+	var argv1
 
 	//種別
 	var TypeNames = [
@@ -110,6 +111,8 @@
 		//絵日記の文字を作成
 		text1 = new createjs.Text("init", "24px serif", "DarkRed");
 		stage.addChild(text1);
+
+		argv1 = location.href.split("?")[1];
 
 		//選択肢の位置情報
 		DyArrShp5wPos.push(new DyShp5wPos(15, 325));
@@ -224,10 +227,32 @@
 
 	}
 
-	//選択肢の生成とイベントの登録
-	function DyShapeDef() {
+	//各シェープの作成と登録(1)
+	function DyShapeDefImg1() {
+	
+		DyBackGround.push(new createjs.Bitmap("mpd_img/boot11.png"));	//起動画面(上)
+		DyBackGround.push(new createjs.Bitmap("mpd_img/boot2.png"));	//起動画面(下)
+		DyBackGround.push(new createjs.Bitmap("mpd_img/sea1.png"));		//背景画面(海)
+		DyBackGround.push(new createjs.Bitmap("mpd_img/park1.png"));	//背景画面(公園)
 
-		//各シェープの作成と登録
+		DyBmpAdd("TYPE_WHEN", "mpd_img/when1.png", "TYPE_WHEN,in the morning");		//午前
+		DyBmpAdd("TYPE_WHEN", "mpd_img/when2.png", "TYPE_WHEN,in the afternoon");	//午後
+
+		DyBmpAdd("TYPE_WHERE", "mpd_img/where1.png", "TYPE_WHERE,at the sea,2");	//海
+		DyBmpAdd("TYPE_WHERE", "mpd_img/where2.png", "TYPE_WHERE,in the park,3");	//公園
+
+		DyBmpAdd("TYPE_WHO", "mpd_img/who0.png", "TYPE_WHO,,0");					//自分
+		DyBmpAdd("TYPE_WHO", "mpd_img/who1.png", "TYPE_WHO,with my friend,1");		//男友達
+		DyBmpAdd("TYPE_WHO", "mpd_img/who2.png", "TYPE_WHO,with my friend,2");		//女友達
+
+		DyBmpAdd("TYPE_WHAT", "mpd_img/what1.png", "TYPE_WHAT,enjoyed the beach ball");	//ビーチボール
+		DyBmpAdd("TYPE_WHAT", "mpd_img/what2.png", "TYPE_WHAT,enjoyed the swing");		//ジャングルジム
+		DyShapeRst();
+	}
+
+	//各シェープの作成と登録(2)
+	function DyShapeDefImg2() {
+
 		DyBackGround.push(new createjs.Bitmap("mpd_img/boot12.png"));	//起動画面(上)
 		DyBackGround.push(new createjs.Bitmap("mpd_img/boot2.png"));	//起動画面(下)
 		DyBackGround.push(new createjs.Bitmap("mpd_img/sea1.png"));		//背景画面(海)
@@ -246,9 +271,21 @@
 		DyBmpAdd("TYPE_WHAT", "mpd_img/what4.png", "TYPE_WHAT,had a barbecue,Meat");	//バーベキュー
 		DyBmpAdd("TYPE_WHAT", "mpd_img/what3.png", "TYPE_WHAT,had a sandwich,The sandwich");	//サンドイッチ
 		DyShapeRst();
+	}
+
+	//選択肢の生成とイベントの登録
+	function DyShapeDef() {
+
+		//各シェープの作成と登録
+		if (argv1 == "mpd1") {
+			//○○して楽しかった
+			DyShapeDefImg1();
+		} else if(argv1 == "mpd2") {
+			//○○が美味しかった
+			DyShapeDefImg2();
+		}
 
 		//イベントを登録
-		
 		//WHEN
 		for (var i=0; i<DyShpWhen.length; i++) {
 			DyShpWhen[i].addEventListener("pressup", handlePressUp);
@@ -519,7 +556,15 @@
 			DySwBtn(5);
 			DyObjClear5W();
 			DyDrawRect(5);
-			DyWrite();
+
+			//各シェープの作成と登録
+			if (argv1 == "mpd1") {
+				//○○して楽しかった
+				DyWrite1();
+			} else if(argv1 == "mpd2") {
+				//○○が美味しかった
+				DyWrite2();
+			}
 		}
 
 		//CLEAR
@@ -543,7 +588,7 @@
 	}
 
 	//絵から日記を書く処理
-	function DyWrite() {
+	function DyWrite1() {
 
 		//各選択肢をすべて選択しているかどうか確認する
 		var words = [];
@@ -554,16 +599,16 @@
 		for(var i=0;i<DyShpDraw.length; ++i) {
 			words[i] = DyShpDraw[i].name.split(',');
 			if( 'TYPE_WHAT' == words[i][0] ) {
-				var fgWhat = 1;
+				fgWhat = 1;
 			}
 			if( 'TYPE_WHO' == words[i][0] ) {
-				var fgWho = 1;
+				fgWho = fgWho + 1;
 			}
 			if( 'TYPE_WHEN' == words[i][0] ) {
-				var fgWhen = 1;
+				fgWhen = 1;
 			}
 			if( 'TYPE_WHERE' == words[i][0] ) {
-				var fgWhere = 1;
+				fgWhere = 1;
 			}
 		}
 
@@ -626,6 +671,139 @@
 				
 				if (j == i ) {
 					strText2 += words[i][1];
+					if (fgWho > 2) {
+						strText2 += "s";
+					}
+				}
+			}
+		}
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHERE' == words[i][0] ) {
+				strText2 += " ";
+				strText2 += words[i][1];
+			}
+		}
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHEN' == words[i][0] ) {
+				strText2 += " ";
+				strText2 += words[i][1];
+			}
+		}
+
+		var wBus;
+		var wLen2 = strText2.length;
+		wBus = Math.floor(wLen2 / 35);
+
+		var wStr = strText2;
+		for (var i=0; i<wBus; i++) {
+			var idx = (i+1)*35;
+			var res1 = wStr.slice(idx-1,idx+1);
+			var res2 = wStr.slice(30,40);
+			var res3 = wStr.slice(idx-1,idx-1);
+			if (wStr.slice(idx-1,idx) == " ") {
+				wStr = strIns(wStr, (i+1)*35, '\n');
+			}
+			else {
+				wStr = strIns(wStr, (i+1)*35, '-\n');
+			}
+		}
+		strText2 = wStr;
+
+		text1.text = strText1 + strText2 + ".\n";
+		text1.x = 10;
+		text1.y = 325;
+		text1.color = "DarkRed"
+		stage.addChild(text1);
+
+	}
+
+	//絵から日記を書く処理
+	function DyWrite2() {
+
+		//各選択肢をすべて選択しているかどうか確認する
+		var words = [];
+		var fgWhat = 0;
+		var fgWho = 0;
+		var fgWhen = 0;
+		var fgWhere = 0;
+		for(var i=0;i<DyShpDraw.length; ++i) {
+			words[i] = DyShpDraw[i].name.split(',');
+			if( 'TYPE_WHAT' == words[i][0] ) {
+				fgWhat = 1;
+			}
+			if( 'TYPE_WHO' == words[i][0] ) {
+				fgWho = fgWho + 1;
+			}
+			if( 'TYPE_WHEN' == words[i][0] ) {
+				fgWhen = 1;
+			}
+			if( 'TYPE_WHERE' == words[i][0] ) {
+				fgWhere = 1;
+			}
+		}
+
+		//選択してない選択肢を表示する
+		text1.x = 50;
+		text1.y = 400;
+		text1.color = "red"
+		if (0 == fgWhere) {
+			text1.text = "Please select item [WHERE].\n"
+			stage.addChild(text1);
+			return;
+		}
+		if (0 == fgWhen) {
+			text1.text = "Please select item [WHEN].\n"
+			stage.addChild(text1);
+			return;
+		}
+		if (0 == fgWho) {
+			text1.text = "Please select item [WHO].\n"
+			stage.addChild(text1);
+			return;
+		}
+		if (0 == fgWhat) {
+			text1.text = "Please select item [WHAT].\n"
+			stage.addChild(text1);
+			return;
+		}
+
+		//絵日記を読み取る
+		var now = new Date();
+		strText1 =  MonthNames[now.getMonth()] + ' ';
+		strText1 += String(now.getDate()) + ',';
+		strText1 += ' ' + String(now.getFullYear());
+		strText1 += '(' + DayNames[now.getDay()] + '.)';
+		strText1 += '\n\n';
+		
+		var wLen1 = strText1.length;
+
+		var strText2 = "I";
+
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHAT' == words[i][0] ) {
+				strText2 += " ";
+				strText2 += words[i][1];
+			}
+		}
+		for (var i=0; i<words.length; i++) {
+			if( 'TYPE_WHO' == words[i][0] ) {
+				if (0 != words[i][2]) {
+					strText2 += " ";
+				}
+
+				//フレンドのときは一人でも二人でもフレンドにしたい
+				var j
+				for (j=0; j<i; j++) {
+					if (words[i][1] == words[j][1]) {
+						break;
+					}
+				}
+				
+				if (j == i ) {
+					strText2 += words[i][1];
+					if (fgWho > 2) {
+						strText2 += "s";
+					}
 				}
 			}
 		}
