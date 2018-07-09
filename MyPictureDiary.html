@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0158</title>
+	<title>Touch Enikki Ver.0159</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -268,8 +268,8 @@
 		DyBmpAdd("TYPE_WHO", "mpd_img/who1.png", "TYPE_WHO,with my friend,1");		//男友達
 		DyBmpAdd("TYPE_WHO", "mpd_img/who2.png", "TYPE_WHO,with my friend,2");		//女友達
 
-		DyBmpAdd("TYPE_WHAT", "mpd_img/what4.png", "TYPE_WHAT,had a barbecue,Meat");	//バーベキュー
-		DyBmpAdd("TYPE_WHAT", "mpd_img/what3.png", "TYPE_WHAT,had a sandwich,The sandwich");	//サンドイッチ
+		DyBmpAdd("TYPE_WHAT", "mpd_img/what4.png", "TYPE_WHAT,had a barbecue,The Meat");	//バーベキュー
+		DyBmpAdd("TYPE_WHAT", "mpd_img/what3.png", "TYPE_WHAT,had a sandwich,The sandwiches");	//サンドイッチ
 		DyShapeRst();
 	}
 
@@ -602,7 +602,7 @@
 				fgWhat = 1;
 			}
 			if( 'TYPE_WHO' == words[i][0] ) {
-				fgWho = fgWho + 1;
+				var fgWho = 1;
 			}
 			if( 'TYPE_WHEN' == words[i][0] ) {
 				fgWhen = 1;
@@ -655,28 +655,24 @@
 				strText2 += words[i][1];
 			}
 		}
+
+		//友達が2以上の場合は複数形にする
+		var iCnt = 0;
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
-				if (0 != words[i][2]) {
+
+				iCnt++;
+				if (2 == iCnt) {
 					strText2 += " ";
+					strText2 += words[i][1];
 				}
 
-				//フレンドのときは一人でも二人でもフレンドにしたい
-				var j
-				for (j=0; j<i; j++) {
-					if (words[i][1] == words[j][1]) {
-						break;
-					}
-				}
-				
-				if (j == i ) {
-					strText2 += words[i][1];
-					if (fgWho > 2) {
-						strText2 += "s";
-					}
+				if (3 == iCnt) {
+					strText2 += "s";
 				}
 			}
 		}
+
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHERE' == words[i][0] ) {
 				strText2 += " ";
@@ -697,14 +693,14 @@
 		var wStr = strText2;
 		for (var i=0; i<wBus; i++) {
 			var idx = (i+1)*35;
-			var res1 = wStr.slice(idx-1,idx+1);
-			var res2 = wStr.slice(30,40);
-			var res3 = wStr.slice(idx-1,idx-1);
-			if (wStr.slice(idx-1,idx) == " ") {
-				wStr = strIns(wStr, (i+1)*35, '\n');
+			var res1 = wStr.slice(idx-1,idx);
+			var res2 = wStr.slice(idx,idx+1);
+			var res3 = wStr.slice(idx+1,idx+2);
+			if (res1 != " " && res2 != " ") {
+				wStr = strIns(wStr, (i+1)*35, '-\n');
 			}
 			else {
-				wStr = strIns(wStr, (i+1)*35, '-\n');
+				wStr = strIns(wStr, (i+1)*35, '\n');
 			}
 		}
 		strText2 = wStr;
@@ -732,7 +728,7 @@
 				fgWhat = 1;
 			}
 			if( 'TYPE_WHO' == words[i][0] ) {
-				fgWho = fgWho + 1;
+				var fgWho = 1;
 			}
 			if( 'TYPE_WHEN' == words[i][0] ) {
 				fgWhen = 1;
@@ -785,28 +781,24 @@
 				strText2 += words[i][1];
 			}
 		}
+
+		//友達が2以上の場合は複数形にする
+		var iCnt = 0;
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
-				if (0 != words[i][2]) {
+
+				iCnt++;
+				if (2 == iCnt) {
 					strText2 += " ";
+					strText2 += words[i][1];
 				}
 
-				//フレンドのときは一人でも二人でもフレンドにしたい
-				var j
-				for (j=0; j<i; j++) {
-					if (words[i][1] == words[j][1]) {
-						break;
-					}
-				}
-				
-				if (j == i ) {
-					strText2 += words[i][1];
-					if (fgWho > 2) {
-						strText2 += "s";
-					}
+				if (3 == iCnt) {
+					strText2 += "s";
 				}
 			}
 		}
+
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHERE' == words[i][0] ) {
 				strText2 += " ";
@@ -823,7 +815,12 @@
 			if( 'TYPE_WHAT' == words[i][0] ) {
 				strText2 += ". ";
 				strText2 += words[i][2];
-				strText2 += " was very delicious";
+				if (words[i][2] == "The sandwiches") {
+					strText2 += " were very delicious";
+				}
+				else {
+					strText2 += " was very delicious";
+				}
 			}
 		}
 		var wBus;
@@ -833,14 +830,14 @@
 		var wStr = strText2;
 		for (var i=0; i<wBus; i++) {
 			var idx = (i+1)*35;
-			var res1 = wStr.slice(idx-1,idx+1);
-			var res2 = wStr.slice(30,40);
-			var res3 = wStr.slice(idx-1,idx-1);
-			if (wStr.slice(idx-1,idx) == " ") {
-				wStr = strIns(wStr, (i+1)*35, '\n');
+			var res1 = wStr.slice(idx-1,idx);
+			var res2 = wStr.slice(idx,idx+1);
+			var res3 = wStr.slice(idx+1,idx+2);
+			if (res1 != " " && res2 != " ") {
+				wStr = strIns(wStr, (i+1)*35, '-\n');
 			}
 			else {
-				wStr = strIns(wStr, (i+1)*35, '-\n');
+				wStr = strIns(wStr, (i+1)*35, '\n');
 			}
 		}
 		strText2 = wStr;
