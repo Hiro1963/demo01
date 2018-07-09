@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Touch Enikki Ver.0159</title>
+	<title>Touch Enikki Ver.0160</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -657,21 +657,26 @@
 		}
 
 		//友達が2以上の場合は複数形にする
-		var iCnt = 0;
+		var iCnt1 = 0;
+		var iCnt2 = 0;
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
 
-				iCnt++;
-				if (2 == iCnt) {
-					strText2 += " ";
-					strText2 += words[i][1];
+				iCnt1++;
+				if (0 != words[i][2]) {
+					if (0 == iCnt2) {
+						iCnt2++;
+						strText2 += " ";
+						strText2 += words[i][1];
+					}
 				}
 
-				if (3 == iCnt) {
+				if (3 == iCnt1) {
 					strText2 += "s";
 				}
 			}
 		}
+
 
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHERE' == words[i][0] ) {
@@ -783,17 +788,21 @@
 		}
 
 		//友達が2以上の場合は複数形にする
-		var iCnt = 0;
+		var iCnt1 = 0;
+		var iCnt2 = 0;
 		for (var i=0; i<words.length; i++) {
 			if( 'TYPE_WHO' == words[i][0] ) {
 
-				iCnt++;
-				if (2 == iCnt) {
-					strText2 += " ";
-					strText2 += words[i][1];
+				iCnt1++;
+				if (0 != words[i][2]) {
+					if (0 == iCnt2) {
+						iCnt2++;
+						strText2 += " ";
+						strText2 += words[i][1];
+					}
 				}
 
-				if (3 == iCnt) {
+				if (3 == iCnt1) {
 					strText2 += "s";
 				}
 			}
